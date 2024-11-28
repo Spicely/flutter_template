@@ -1,20 +1,16 @@
 import 'dart:ui';
 
-/*
- * Summary: 主题色mixin
- * Created Date: 2023-04-05 10:46:04
- * Author: Spicely
- * -----
- * Last Modified: 2023-07-16 13:19:09
- * Modified By: Spicely
- * -----
- * Copyright (c) 2023 Spicely Inc.
- * 
- * May the force be with you.
- * -----
- * HISTORY:
- * Date      	By	Comments
- */
+/////////////////////////////////////////////////////////////////////////
+///
+/// All rights reserved.
+///
+/// author: Spicely
+///
+/// Summary: 主题混入获取
+///
+/// Date: 2024年11月28日 16:41:05 Thursday
+///
+//////////////////////////////////////////////////////////////////////////
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

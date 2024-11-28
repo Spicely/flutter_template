@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 
 part 'extend_colors.dart';
 
+/////////////////////////////////////////////////////////////////////////
+///
+/// All rights reserved.
+///
+/// author: Spicely
+///
+/// Summary: 自定义主题
+///
+/// Date: 2024年11月28日 16:42:41 Thursday
+///
+//////////////////////////////////////////////////////////////////////////
+
 class ThemeCustom {
   static ThemeData light = ThemeData(
     extensions: const <ThemeExtension<ExtendColors>>[ExtendColors.light],
