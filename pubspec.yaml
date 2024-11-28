@@ -40,6 +40,16 @@ dependencies:
   cupertino_icons: ^1.0.8
   get: 
   envied:
+  permission_handler:
+  simple_native_image_compress:
+  video_compress:
+  path:
+  path_provider:
+  flutter_native_splash:
+  isar:
+    hosted: https://pub.isar-community.dev/
+  isar_flutter_libs:
+    hosted: https://pub.isar-community.dev/
 
 dev_dependencies:
   flutter_test:
@@ -48,6 +58,8 @@ dev_dependencies:
   isar_generator:
     hosted: https://pub.isar-community.dev/
   build_runner: 
+  flutter_launcher_icons: 
+  flutter_native_splash:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

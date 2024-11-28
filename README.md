@@ -19,6 +19,12 @@
 
     /// 依据env生成
     dart run build_runner build
+
+    /// 图标生成
+    dart run flutter_launcher_icons
+
+    /// 启动页图片
+    dart run flutter_native_splash:create
 ```
 
 ### 打包
