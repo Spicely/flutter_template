@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 /////////////////////////////////////////////////////////////////////////
 ///
 /// All rights reserved.
@@ -20,9 +18,11 @@ import '../theme/theme_custom.dart';
 mixin ThemeMixin {
   Color? get themeColor => Get.context?.theme.extension<ExtendColors>()?.themeColor;
 
-  Color? get primaryColor => Get.context?.theme.primaryColor;
+  Color? get primaryColor => Get.context?.theme.colorScheme.primary;
 
   Color? get gray => Get.context?.theme.extension<ExtendColors>()?.gray;
 
   Color? get subColor => Get.context?.theme.extension<ExtendColors>()?.subColor;
+
+  BorderRadius get borderRadius => BorderRadius.circular(12);
 }

@@ -45,11 +45,12 @@ dependencies:
   video_compress:
   path:
   path_provider:
-  flutter_native_splash:
   isar:
     hosted: https://pub.isar-community.dev/
   isar_flutter_libs:
     hosted: https://pub.isar-community.dev/
+  package_info_plus:
+  flutter_inappwebview:
 
 dev_dependencies:
   flutter_test:

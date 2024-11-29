@@ -8,7 +8,6 @@ class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
   @override
   Widget build(BuildContext context) {
-    print(controller);
     return Scaffold(
       appBar: AppBar(
         title: const Text('HomeView'),

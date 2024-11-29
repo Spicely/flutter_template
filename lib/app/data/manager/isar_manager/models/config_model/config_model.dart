@@ -6,6 +6,7 @@ part 'config_model.g.dart';
 class ConfigModel {
   final Id id = Isar.autoIncrement;
 
+  /// 是否同意协议
   @Index(type: IndexType.value)
   bool isAgreement;
 

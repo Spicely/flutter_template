@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
+import 'app/controllers/global_controller.dart';
 import 'app/data/config/config.dart';
+import 'app/data/manager/isar_manager/isar_manager.dart';
+import 'app/data/manager/isar_manager/models/config_model/config_model.dart';
 import 'app/data/theme/theme_custom.dart';
 import 'app/routes/app_pages.dart';
 import 'generated/l10n.dart';
 
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  WidgetsFlutterBinding.ensureInitialized();
 
   await Config.init();
+
+  /// 初始化全局控制器
+  ConfigModel config = await IsarManager.configManager.get();
+  Get.put(GlobalController(config: config));
+
   runApp(
     GetMaterialApp(
-      title: "Application",
+      title: Config.appName,
       initialRoute: AppPages.INITIAL,
       theme: ThemeCustom.light,
       darkTheme: ThemeCustom.dark,

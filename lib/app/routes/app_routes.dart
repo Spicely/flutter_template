@@ -6,9 +6,17 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
+
+  /// 启动页
+  static const SPLASH = _Paths.SPLASH;
+
+  /// 浏览器
+  static const BROWSER = _Paths.BROWSER;
 }
 
 abstract class _Paths {
   _Paths._();
   static const HOME = '/home';
+  static const SPLASH = '/splash';
+  static const BROWSER = '/browser';
 }
