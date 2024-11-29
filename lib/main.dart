@@ -38,6 +38,10 @@ void main() async {
         debugPrint('当前系统语言环境$locales');
         return;
       },
+      localeResolutionCallback: (locale, supportedLocales) {
+        debugPrint('当前系统语言环境$locale');
+        return locale;
+      },
       getPages: AppPages.routes,
     ),
   );

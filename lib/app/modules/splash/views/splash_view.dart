@@ -3,6 +3,18 @@ import 'package:get/get.dart';
 
 import '../controllers/splash_controller.dart';
 
+/////////////////////////////////////////////////////////////////////////
+///
+/// All rights reserved.
+///
+/// author: Spicely
+///
+/// Summary: 启动页面
+///
+/// Date: 2024年11月30日 02:05:05 Saturday
+///
+//////////////////////////////////////////////////////////////////////////
+
 class SplashView extends GetView<SplashController> {
   const SplashView({super.key});
   @override

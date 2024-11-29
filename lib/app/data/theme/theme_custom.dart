@@ -17,21 +17,17 @@ part 'extend_colors.dart';
 class ThemeCustom {
   static ThemeData light = ThemeData(
     extensions: const <ThemeExtension<ExtendColors>>[ExtendColors.light],
-    colorScheme: ColorScheme.fromSwatch(
-      primarySwatch: Colors.green,
-      accentColor: Colors.blueAccent,
-      backgroundColor: Colors.white,
-      errorColor: Colors.red,
+    brightness: Brightness.light,
+    colorScheme: const ColorScheme.light(
+      primary: Colors.green,
     ),
   );
 
   static ThemeData dark = ThemeData(
     extensions: const <ThemeExtension<ExtendColors>>[ExtendColors.dark],
-    colorScheme: ColorScheme.fromSwatch(
-      primarySwatch: Colors.green,
-      accentColor: Colors.blueAccent,
-      backgroundColor: Colors.white,
-      errorColor: Colors.red,
+    brightness: Brightness.dark,
+    colorScheme: const ColorScheme.dark(
+      primary: Colors.green,
     ),
   );
 }

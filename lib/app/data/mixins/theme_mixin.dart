@@ -1,3 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../theme/theme_custom.dart';
+
 /////////////////////////////////////////////////////////////////////////
 ///
 /// All rights reserved.
@@ -9,11 +14,6 @@
 /// Date: 2024年11月28日 16:41:05 Thursday
 ///
 //////////////////////////////////////////////////////////////////////////
-
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../theme/theme_custom.dart';
 
 mixin ThemeMixin {
   Color? get themeColor => Get.context?.theme.extension<ExtendColors>()?.themeColor;
