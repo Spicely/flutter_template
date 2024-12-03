@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_template/app/data/utils/utils.dart';
 import 'package:get/get.dart';
 
 import 'app/controllers/global_controller.dart';
-import 'app/data/config/config.dart';
 import 'app/data/manager/isar_manager/isar_manager.dart';
 import 'app/data/manager/isar_manager/models/config_model/config_model.dart';
 import 'app/data/theme/theme_custom.dart';
@@ -13,7 +13,7 @@ import 'generated/l10n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Config.init();
+  await utils.init();
 
   /// 初始化全局控制器
   ConfigModel config = await IsarManager.configManager.get();
@@ -21,7 +21,7 @@ void main() async {
 
   runApp(
     GetMaterialApp(
-      title: Config.appName,
+      title: utils.config.appName,
       initialRoute: AppPages.INITIAL,
       theme: ThemeCustom.light,
       darkTheme: ThemeCustom.dark,

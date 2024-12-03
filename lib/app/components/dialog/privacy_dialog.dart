@@ -5,8 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../data/config/config.dart';
 import '../../data/mixins/theme_mixin.dart';
+import '../../data/utils/utils.dart';
 import '../../routes/app_pages.dart';
 
 /////////////////////////////////////////////////////////////////////////
@@ -43,7 +43,7 @@ class PrivacyDialog extends StatelessWidget with ThemeMixin {
     return PopScope(
       canPop: false,
       child: CupertinoAlertDialog(
-        title: Text('欢迎使用 ${Config.appName}'),
+        title: Text('欢迎使用 ${utils.config.appName}'),
         content: SizedBox(
           height: 120,
           child: ListView(

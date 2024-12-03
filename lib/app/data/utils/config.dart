@@ -1,13 +1,4 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-
-import '../manager/compress_manager/compress_manager.dart';
-import '../manager/isar_manager/isar_manager.dart';
-import '../manager/system_manager/system_manager.dart';
+part of 'utils.dart';
 /////////////////////////////////////////////////////////////////////////
 ///
 /// All rights reserved.
@@ -21,20 +12,22 @@ import '../manager/system_manager/system_manager.dart';
 //////////////////////////////////////////////////////////////////////////
 
 class Config {
-  static bool _isInit = false;
+  Config._();
 
-  static late final Directory directory;
+  bool _isInit = false;
+
+  late final Directory directory;
 
   /// 压缩输出路径
-  static late String compressedOutputPath;
+  late String compressedOutputPath;
 
   /// 版本号
-  static String version = '';
+  String version = '';
 
   /// 应用名称
-  static String appName = 'Template';
+  String appName = 'Template';
 
-  static Future<void> init() async {
+  Future<void> init() async {
     if (_isInit) return;
     _isInit = true;
     directory = await getApplicationSupportDirectory();
@@ -48,7 +41,7 @@ class Config {
   }
 
   /// 获取版本号
-  static Future<void> _getVersion() async {
+  Future<void> _getVersion() async {
     // 获取包信息
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
