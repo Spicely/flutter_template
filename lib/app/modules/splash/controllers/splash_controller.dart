@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../../resources/resources.dart';
-import '../../../components/dialog/privacy_dialog.dart';
+import '../../../components/dialog/privacy_dialog/privacy_dialog.dart';
 import '../../../controllers/global_controller.dart';
 import '../../../data/manager/isar_manager/isar_manager.dart';
 import '../../../routes/app_pages.dart';

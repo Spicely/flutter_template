@@ -5,9 +5,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../data/mixins/theme_mixin.dart';
-import '../../data/utils/utils.dart';
-import '../../routes/app_pages.dart';
+import '../../../data/mixins/theme_mixin.dart';
+import '../../../data/utils/utils.dart';
+import '../../../routes/app_pages.dart';
 
 /////////////////////////////////////////////////////////////////////////
 ///
@@ -88,10 +88,8 @@ class PrivacyDialog extends StatelessWidget with ThemeMixin {
             },
           ),
           CupertinoDialogAction(
+            onPressed: onAgree,
             child: const Text('同意', style: TextStyle(color: Colors.blue)),
-            onPressed: () {
-              onAgree?.call();
-            },
           ),
         ],
       ),

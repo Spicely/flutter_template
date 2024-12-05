@@ -1,5 +1,8 @@
 import 'package:permission_handler/permission_handler.dart';
 
+import '../enums/permission_type.dart';
+import '../exception/permission_exception.dart';
+
 /////////////////////////////////////////////////////////////////////////
 ///
 /// All rights reserved.
@@ -14,11 +17,26 @@ import 'package:permission_handler/permission_handler.dart';
 
 mixin PermissionMixin {
   /// 获取定位权限
-  Future<void> requestLocationPermission({Function? callback}) async {
+  Future<void> requestLocationPermission() async {
     if (await Permission.location.request().isGranted) {
-      callback?.call();
-    } else {
-      // openAppSettings();
+      return;
     }
+    throw PermissionException(PermissionType.location, '定位权限获取失败');
+  }
+
+  /// 获取相机权限
+  Future<void> requestCameraPermission() async {
+    if (await Permission.camera.request().isGranted) {
+      return;
+    }
+    throw PermissionException(PermissionType.camera, '相机权限获取失败');
+  }
+
+  /// 获取麦克风权限
+  Future<void> requestMicrophonePermission() async {
+    if (await Permission.microphone.request().isGranted) {
+      return;
+    }
+    throw PermissionException(PermissionType.microphone, '麦克风权限获取失败');
   }
 }
