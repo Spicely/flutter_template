@@ -11,11 +11,11 @@ import '../manager/compress_manager/compress_manager.dart';
 import '../manager/isar_manager/isar_manager.dart';
 import '../manager/system_manager/system_manager.dart';
 
-part 'config.dart';
-part 'plugins.dart';
+part '_config.dart';
+part '_plugins.dart';
 
-class Utils {
-  Utils._();
+class _Utils {
+  _Utils._();
 
   _Plugins plugins = _Plugins._();
 
@@ -27,4 +27,4 @@ class Utils {
   }
 }
 
-Utils utils = Utils._();
+final utils = _Utils._();
