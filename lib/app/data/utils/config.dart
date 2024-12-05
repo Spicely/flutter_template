@@ -11,8 +11,8 @@ part of 'utils.dart';
 ///
 //////////////////////////////////////////////////////////////////////////
 
-class Config {
-  Config._();
+class _Config {
+  _Config._();
 
   bool _isInit = false;
 

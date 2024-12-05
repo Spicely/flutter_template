@@ -1,7 +1,7 @@
 part of 'utils.dart';
 
-class Plugins {
-  Plugins._();
+class _Plugins {
+  _Plugins._();
 
   Future<void> init() async {}
 }

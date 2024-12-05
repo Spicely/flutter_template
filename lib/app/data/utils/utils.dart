@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -15,9 +17,9 @@ part 'plugins.dart';
 class Utils {
   Utils._();
 
-  Plugins plugins = Plugins._();
+  _Plugins plugins = _Plugins._();
 
-  Config config = Config._();
+  _Config config = _Config._();
 
   Future<void> init() async {
     await config.init();
