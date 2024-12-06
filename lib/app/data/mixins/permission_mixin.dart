@@ -39,4 +39,12 @@ mixin PermissionMixin {
     }
     throw PermissionException(PermissionType.microphone, '麦克风权限获取失败');
   }
+
+  /// 获取存储权限
+  Future<void> requestStoragePermission() async {
+    if (await Permission.storage.request().isGranted) {
+      return;
+    }
+    throw PermissionException(PermissionType.storage, '存储权限获取失败');
+  }
 }

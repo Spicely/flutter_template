@@ -1,6 +1,6 @@
 # flutter 模板
 
-### 前置
+> 前置
 
 ```
     flutter pub global activate get_cli # 安装get_cli
@@ -27,7 +27,7 @@
     dart run flutter_native_splash:create
 ```
 
-### 打包
+> 打包
 
 ```
     /// 打包测试
@@ -50,5 +50,34 @@
 
     /// 打包正式windows
     flutter_distributor release --name prod --jobs release-windows --skip-clean
+
+```
+
+```dart
+AppInstaller.installApk('/sdcard/apk/app-debug.apk');
+```
+
+> AndroidManifest.xml
+
+```xml
+<!-- Provider -->
+<provider
+    android:name="androidx.core.content.FileProvider"
+    android:authorities="${applicationId}.fileProvider"
+    android:exported="false"
+    android:grantUriPermissions="true">
+    <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/file_paths" />
+</provider>
+```
+
+> android/app/src/main/res/xml/file_paths.xml
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <files-path name="apk_files" path="apk/" />
+</paths>
 
 ```

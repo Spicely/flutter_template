@@ -51,6 +51,9 @@ dependencies:
     hosted: https://pub.isar-community.dev/
   package_info_plus:
   flutter_inappwebview:
+  dio:
+  app_installer:
+  
 
 dev_dependencies:
   flutter_test:

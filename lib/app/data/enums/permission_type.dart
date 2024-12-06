@@ -4,4 +4,6 @@ enum PermissionType {
   camera,
 
   microphone,
+
+  storage,
 }
