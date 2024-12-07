@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../theme/theme_custom.dart';
 
@@ -16,13 +15,13 @@ import '../theme/theme_custom.dart';
 //////////////////////////////////////////////////////////////////////////
 
 mixin ThemeMixin {
-  Color? get themeColor => Get.context?.theme.extension<ExtendColors>()?.themeColor;
+  Color? themeColor(BuildContext context) => Theme.of(context).extension<ExtendColors>()?.themeColor;
 
-  Color? get primaryColor => Get.context?.theme.colorScheme.primary;
+  Color? primaryColor(BuildContext context) => Theme.of(context).colorScheme.primary;
 
-  Color? get gray => Get.context?.theme.extension<ExtendColors>()?.gray;
+  Color? gray(BuildContext context) => Theme.of(context).extension<ExtendColors>()?.gray;
 
-  Color? get subColor => Get.context?.theme.extension<ExtendColors>()?.subColor;
+  Color? subColor(BuildContext context) => Theme.of(context).extension<ExtendColors>()?.subColor;
 
   BorderRadius get borderRadius => BorderRadius.circular(12);
 }
