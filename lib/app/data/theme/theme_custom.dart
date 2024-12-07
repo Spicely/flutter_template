@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-part 'extend_colors.dart';
+part 'extend_theme.dart';
 
 /////////////////////////////////////////////////////////////////////////
 ///
@@ -16,7 +16,7 @@ part 'extend_colors.dart';
 
 class ThemeCustom {
   static ThemeData light = ThemeData(
-    extensions: const <ThemeExtension<ExtendColors>>[ExtendColors.light],
+    extensions: const <ThemeExtension<ExtendTheme>>[ExtendTheme.light],
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(
       primary: Colors.green,
@@ -24,7 +24,7 @@ class ThemeCustom {
   );
 
   static ThemeData dark = ThemeData(
-    extensions: const <ThemeExtension<ExtendColors>>[ExtendColors.dark],
+    extensions: const <ThemeExtension<ExtendTheme>>[ExtendTheme.dark],
     brightness: Brightness.dark,
     colorScheme: const ColorScheme.dark(
       primary: Colors.green,

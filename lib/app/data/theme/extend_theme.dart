@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 part of 'theme_custom.dart';
 
 /////////////////////////////////////////////////////////////////////////
@@ -11,9 +13,7 @@ part of 'theme_custom.dart';
 /// Date: 2024年11月28日 16:42:23 Thursday
 ///
 //////////////////////////////////////////////////////////////////////////
-
-@immutable
-class ExtendColors extends ThemeExtension<ExtendColors> {
+class ExtendTheme extends ThemeExtension<ExtendTheme> {
   /// 主题色
   final Color themeColor;
 
@@ -21,15 +21,15 @@ class ExtendColors extends ThemeExtension<ExtendColors> {
 
   final Color subColor;
 
-  const ExtendColors({
+  const ExtendTheme({
     required this.themeColor,
     required this.gray,
     required this.subColor,
   });
 
   @override
-  ThemeExtension<ExtendColors> copyWith() {
-    return ExtendColors(
+  ThemeExtension<ExtendTheme> copyWith() {
+    return ExtendTheme(
       themeColor: themeColor,
       gray: gray,
       subColor: subColor,
@@ -37,26 +37,45 @@ class ExtendColors extends ThemeExtension<ExtendColors> {
   }
 
   @override
-  ThemeExtension<ExtendColors> lerp(ThemeExtension<ExtendColors> other, double t) {
-    if (other is! ExtendColors) {
+  ThemeExtension<ExtendTheme> lerp(ThemeExtension<ExtendTheme> other, double t) {
+    if (other is! ExtendTheme) {
       return this;
     }
-    return ExtendColors(
+    return ExtendTheme(
       themeColor: Color.lerp(themeColor, other.themeColor, t)!,
       gray: Color.lerp(gray, other.gray, t)!,
       subColor: Color.lerp(subColor, other.subColor, t)!,
     );
   }
 
-  static const light = ExtendColors(
+  static const light = ExtendTheme(
     themeColor: Colors.white,
     gray: Color.fromRGBO(32, 31, 41, 1),
     subColor: Color.fromRGBO(178, 178, 178, 1),
   );
 
-  static const dark = ExtendColors(
+  static const dark = ExtendTheme(
     themeColor: Color.fromRGBO(32, 31, 41, 1),
     gray: Color.fromRGBO(52, 51, 61, 1),
     subColor: Color.fromRGBO(178, 178, 178, 1),
   );
+}
+
+class _ExtendTheme {
+  final ExtendTheme? extendColors;
+
+  _ExtendTheme._(this.extendColors);
+
+  Color? get themeColor => extendColors?.themeColor;
+
+  Color? get gray => extendColors?.gray;
+
+  Color? get subColor => extendColors?.subColor;
+
+  BorderRadius borderRadius = BorderRadius.circular(8);
+}
+
+/// 扩展BuildContext
+extension BuildContextExtendColors on BuildContext {
+  _ExtendTheme get extendTheme => _ExtendTheme._(Theme.of(this).extension<ExtendTheme>());
 }

@@ -5,7 +5,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../data/mixins/theme_mixin.dart';
 import '../../../data/utils/utils.dart';
 import '../../../routes/app_pages.dart';
 
@@ -21,7 +20,7 @@ import '../../../routes/app_pages.dart';
 ///
 //////////////////////////////////////////////////////////////////////////
 
-class PrivacyDialog extends StatelessWidget with ThemeMixin {
+class PrivacyDialog extends StatelessWidget {
   /// 隐私地址
   final String privacyUrl;
 
