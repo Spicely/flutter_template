@@ -46,8 +46,6 @@ class _Config {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
     // 获取版本号和构建号
-    String version = packageInfo.version;
-    String buildNumber = packageInfo.buildNumber;
-    version = '$version+$buildNumber';
+    version = packageInfo.version;
   }
 }
