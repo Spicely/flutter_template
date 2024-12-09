@@ -53,6 +53,7 @@ dependencies:
   flutter_inappwebview:
   dio:
   app_installer:
+  logger:
   
 
 dev_dependencies:

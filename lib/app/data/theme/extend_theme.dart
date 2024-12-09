@@ -77,5 +77,5 @@ class _ExtendTheme {
 
 /// 扩展BuildContext
 extension BuildContextExtendColors on BuildContext {
-  _ExtendTheme get extendTheme => _ExtendTheme._(Theme.of(this).extension<ExtendTheme>());
+  _ExtendTheme get eTheme => _ExtendTheme._(Theme.of(this).extension<ExtendTheme>());
 }
