@@ -6,14 +6,15 @@ part of 'utils.dart';
 ///
 /// author: Spicely
 ///
-/// Summary: 插件
+/// Summary: 请求接口
 ///
-/// Date: 2024年12月09日 22:44:05 Monday
+/// Date: 2024年12月09日 22:43:42 Monday
 ///
 //////////////////////////////////////////////////////////////////////////
 
-class _Plugins {
-  _Plugins._();
+class _Apis {
+  _Apis._();
 
-  Future<void> init() async {}
+  /// 登录
+  Future<dynamic> login(dynamic data) => _Http.request('/login', data: data);
 }

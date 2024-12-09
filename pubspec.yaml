@@ -54,6 +54,8 @@ dependencies:
   dio:
   app_installer:
   logger:
+  cookie_jar:
+  pretty_dio_logger:
   
 
 dev_dependencies:
