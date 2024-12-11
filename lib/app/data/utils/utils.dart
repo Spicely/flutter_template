@@ -23,6 +23,7 @@ part '_config.dart';
 part '_error.dart';
 part '_http.dart';
 part '_plugins.dart';
+part '_tools.dart';
 part '_upgrade.dart';
 
 class _Utils {
@@ -32,11 +33,13 @@ class _Utils {
 
   _Config config = _Config._();
 
+  _Error error = _Error._();
+
   _Plugins plugins = _Plugins._();
 
-  _Upgrade upgrade = _Upgrade._();
+  _Tools tools = _Tools._();
 
-  _Error error = _Error._();
+  _Upgrade upgrade = _Upgrade._();
 
   Future<void> init() async {
     await config.init();
