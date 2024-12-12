@@ -1,4 +1,4 @@
-part of 'utils.dart';
+part of '../utils.dart';
 
 /////////////////////////////////////////////////////////////////////////
 ///
@@ -13,21 +13,26 @@ part of 'utils.dart';
 //////////////////////////////////////////////////////////////////////////
 
 class _Upgrade with PermissionMixin {
-  bool _isUpgrade = false;
+  RxBool isUpgrade = false.obs;
 
-  bool _idDownloading = false;
+  RxBool isDownloading = false.obs;
+
+  /// 进度
+  RxDouble progress = 0.0.obs;
+
+  Rx<UpgradeModel> data = UpgradeModel().obs;
 
   /// 更新APP
   void inspect() {
-    if (_isUpgrade) return;
-    _isUpgrade = true;
+    if (isUpgrade.value) return;
+    isUpgrade.value = true;
     utils.exceptionCapture(() async {
-      UpgradeModel model = await checkUpgrade();
-      if (model.isUpgrade) {
-        if (model.isSilentUpgrade) {
-          upgrade(model);
+      data.value = await checkUpgrade();
+      if (data.value.isUpgrade) {
+        if (data.value.isSilentUpgrade) {
+          upgrade();
         } else {
-          Get.dialog(UpgradeDialog(data: model));
+          Get.dialog(const UpgradeDialog());
         }
       }
     });
@@ -39,26 +44,26 @@ class _Upgrade with PermissionMixin {
   }
 
   /// 开始更新
-  void upgrade(UpgradeModel data) {
-    if (_idDownloading) return;
-    _idDownloading = true;
+  void upgrade() {
+    if (isDownloading.value) return;
+    isDownloading.value = true;
 
     if (Platform.isAndroid) {
-      _downloadFile(data);
+      _downloadFile();
     } else {
-      _install(data.fileUrl);
+      _install(data.value.fileUrl);
     }
   }
 
   /// 下载apk
-  void _downloadFile(UpgradeModel data) async {
+  void _downloadFile() async {
     try {
       /// 保存地址
       String directory = p.join(utils.config.directory.path, 'apk');
       Directory(directory).createSync(recursive: true);
 
       /// 文件名
-      String filename = p.basename(data.fileUrl);
+      String filename = p.basename(data.value.fileUrl);
 
       /// 判断文件是否存在
       String savePath = p.join(directory, filename);
@@ -69,16 +74,17 @@ class _Upgrade with PermissionMixin {
 
       /// 开始下载
       await Dio().download(
-        data.fileUrl,
+        data.value.fileUrl,
         savePath,
         onReceiveProgress: (count, total) {
-          print((count / total * 100).toStringAsFixed(2));
+          progress.value = count / total;
         },
       );
       await _install(savePath);
     } catch (e) {
-      _isUpgrade = false;
-      _idDownloading = false;
+      isUpgrade.value = false;
+      isDownloading.value = false;
+      progress.value = 0.0;
       utils.logger.e('下载失败,请检查网络连接');
     }
   }
@@ -86,10 +92,17 @@ class _Upgrade with PermissionMixin {
   /// 安装应用
   Future<void> _install(String filePath) async {
     await requestStoragePermission();
+    const types = {
+      '.apk': 'application/vnd.android.package-archive',
+      '.exe': 'application/octet-stream',
+    };
+
     switch (Platform.operatingSystem) {
       case 'android':
+      case 'windows':
         await requestInstallPermission();
-        await OpenFile.open(filePath, type: 'application/vnd.android.package-archive');
+        final extension = p.extension(filePath);
+        await OpenFile.open(filePath, type: types[extension]);
         break;
 
       case 'ios':
@@ -102,7 +115,7 @@ class _Upgrade with PermissionMixin {
         break;
     }
 
-    _isUpgrade = false;
-    _idDownloading = false;
+    isUpgrade.value = false;
+    isDownloading.value = false;
   }
 }

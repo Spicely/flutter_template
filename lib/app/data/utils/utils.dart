@@ -23,12 +23,13 @@ import '../mixins/permission_mixin.dart';
 part '_apis.dart';
 part '_config.dart';
 part '_error.dart';
-part '_http.dart';
+part '_tools/_http.dart';
 part '_plugins.dart';
-part '_tools.dart';
-part '_upgrade.dart';
+part '_tools/_tools.dart';
+part '_tools/_upgrade.dart';
+part '_extend_upgrade.dart';
 
-class _Utils extends _Upgrade {
+class _Utils {
   _Utils._();
 
   final Logger logger = Logger(printer: PrettyPrinter(methodCount: 2, errorMethodCount: 8, lineLength: 120, colors: true, printEmojis: true));
@@ -44,6 +45,8 @@ class _Utils extends _Upgrade {
   _Plugins plugins = _Plugins._();
 
   _Tools tools = _Tools._();
+
+  _ExtendUpgrade upgrade = _ExtendUpgrade._();
 
   Future<void> init() async {
     await config.init();

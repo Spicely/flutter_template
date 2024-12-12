@@ -1,6 +1,6 @@
 // ignore_for_file: unused_element, non_constant_identifier_names
 
-part of 'utils.dart';
+part of '../utils.dart';
 
 typedef HttpInterceptors = List<Interceptor> Function(Dio? dio);
 

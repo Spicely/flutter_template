@@ -4,40 +4,42 @@ import 'package:get/get.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../data/utils/utils.dart';
-import '../../../data/models/upgrade_model.dart';
 
 class UpgradeDialog extends StatelessWidget {
-  final UpgradeModel data;
-
-  const UpgradeDialog({super.key, required this.data});
+  const UpgradeDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      child: CupertinoAlertDialog(
-        title: Text(S.current.upgrade),
-        content: SizedBox(
-          height: 120,
-          child: ListView(
-            children: [
-              Text(data.versionDesc),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          if (!data.isForceUpgrade)
-            CupertinoDialogAction(
-              onPressed: Get.back,
-              child: Text(S.current.cancel, style: const TextStyle(color: Colors.black)),
+    return Obx(
+      () => PopScope(
+        canPop: !utils.upgrade.data.value.isForceUpgrade,
+        child: CupertinoAlertDialog(
+          title: Text(S.current.upgrade),
+          content: SizedBox(
+            height: 120,
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: [Text(utils.upgrade.data.value.versionDesc)],
+                  ),
+                ),
+                if (utils.upgrade.isDownloading.value) LinearProgressIndicator(value: utils.upgrade.progress.value),
+              ],
             ),
-          CupertinoDialogAction(
-            onPressed: () {
-              utils.upgrade(data);
-            },
-            child: Text(S.current.confirm, style: const TextStyle(color: Colors.blue)),
           ),
-        ],
+          actions: <Widget>[
+            if (!utils.upgrade.data.value.isForceUpgrade)
+              CupertinoDialogAction(
+                onPressed: Get.back,
+                child: Text(S.current.cancel, style: const TextStyle(color: Colors.white)),
+              ),
+            CupertinoDialogAction(
+              onPressed: utils.upgrade.upgrade,
+              child: Text(S.current.confirm, style: const TextStyle(color: Colors.blue)),
+            ),
+          ],
+        ),
       ),
     );
   }

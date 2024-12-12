@@ -1,4 +1,4 @@
-part of 'utils.dart';
+part of '../utils.dart';
 
 class _Tools {
   _Tools._();
