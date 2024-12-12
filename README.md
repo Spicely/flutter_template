@@ -53,31 +53,9 @@
 
 ```
 
-```dart
-AppInstaller.installApk('/sdcard/apk/app-debug.apk');
+> 权限
+
 ```
-
-> AndroidManifest.xml
-
-```xml
-<!-- Provider -->
-<provider
-    android:name="androidx.core.content.FileProvider"
-    android:authorities="${applicationId}.fileProvider"
-    android:exported="false"
-    android:grantUriPermissions="true">
-    <meta-data
-        android:name="android.support.FILE_PROVIDER_PATHS"
-        android:resource="@xml/file_paths" />
-</provider>
-```
-
-> android/app/src/main/res/xml/file_paths.xml
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<paths>
-    <files-path name="apk_files" path="apk/" />
-</paths>
-
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 ```

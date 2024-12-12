@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:app_installer/app_installer.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:logger/logger.dart';
+import 'package:open_file/open_file.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -12,7 +13,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../env/env.dart';
 import '../../components/dialog/upgrade_dialog/upgrade_dialog.dart';
-import '../../components/dialog/upgrade_dialog/upgrade_dialog_model.dart';
+import '../models/upgrade_model.dart';
 import '../manager/compress_manager/compress_manager.dart';
 import '../manager/isar_manager/isar_manager.dart';
 import '../manager/system_manager/system_manager.dart';
@@ -26,29 +27,30 @@ part '_plugins.dart';
 part '_tools.dart';
 part '_upgrade.dart';
 
-class _Utils {
+class _Utils extends _Upgrade {
   _Utils._();
 
-  _Apis apis = _Apis._();
+  final Logger logger = Logger(printer: PrettyPrinter(methodCount: 2, errorMethodCount: 8, lineLength: 120, colors: true, printEmojis: true));
+
+  late _Apis apis = _Apis._(_http);
 
   _Config config = _Config._();
 
-  _Error error = _Error._();
+  late _Error error = _Error._(logger);
+
+  final _Http _http = _Http._(debug: kDebugMode);
 
   _Plugins plugins = _Plugins._();
 
   _Tools tools = _Tools._();
 
-  _Upgrade upgrade = _Upgrade._();
-
   Future<void> init() async {
     await config.init();
     await plugins.init();
 
-    _Http.baseUrl = kReleaseMode ? Env.baseUrl : Env.baseUrlDev;
-    _Http.debug = kDebugMode;
+    _http.baseUrl = kReleaseMode ? Env.baseUrl : Env.baseUrlDev;
 
-    _Http.interceptors = (Dio? d) {
+    _http.interceptors = (Dio? d) {
       return [
         InterceptorsWrapper(
           onRequest: (options, handler) async {
@@ -74,8 +76,6 @@ class _Utils {
       ];
     };
   }
-
-  Logger logger = Logger(printer: PrettyPrinter(methodCount: 2, errorMethodCount: 8, lineLength: 120, colors: true, printEmojis: true));
 
   /// 异常捕获
   Future<void> exceptionCapture(Function() cb, {void Function(DioException)? dioError, void Function(Object)? error}) async {

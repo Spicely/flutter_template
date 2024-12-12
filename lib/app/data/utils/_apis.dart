@@ -13,8 +13,10 @@ part of 'utils.dart';
 //////////////////////////////////////////////////////////////////////////
 
 class _Apis {
-  _Apis._();
+  final _Http _http;
+
+  _Apis._(this._http);
 
   /// 登录
-  Future<dynamic> login(dynamic data) => _Http.request('/login', data: data);
+  Future<dynamic> login(dynamic data) => _http.request('/login', data: data);
 }

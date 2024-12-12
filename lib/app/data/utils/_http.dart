@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, non_constant_identifier_names
 
 part of 'utils.dart';
 
@@ -17,35 +17,40 @@ enum HttpMethod {
 }
 
 class _Http {
-  /// global dio object
-  static Dio? _dio;
-
-  /// 请求地址
-  static set baseUrl(String v) => _dio == null ? _options.baseUrl = v : _dio?.options.baseUrl = v;
-
-  static String get baseUrl => _dio == null ? _options.baseUrl : _dio!.options.baseUrl;
+  final bool debug;
 
   /// 超时时间
-  static Duration connectTimeout = const Duration(seconds: 10);
+  final Duration connectTimeout;
 
-  static Duration receiveTimeout = const Duration(seconds: 10);
+  final Duration receiveTimeout;
 
-  /// 输出请求内容
-  static bool debug = false;
+  _Http._({
+    this.debug = false,
+    this.connectTimeout = const Duration(seconds: 10),
+    this.receiveTimeout = const Duration(seconds: 10),
+  });
+
+  /// global dio object
+  Dio? _dio;
+
+  /// 请求地址
+  set baseUrl(String v) => _dio == null ? _options.baseUrl = v : _dio?.options.baseUrl = v;
+
+  String get baseUrl => _dio == null ? _options.baseUrl : _dio!.options.baseUrl;
 
   /// 代理设置 代理地址
-  // static String? PROXY_URL;
+  String? proxyUrl;
 
   /// 添加额外功能
-  static HttpInterceptors? interceptors;
+  HttpInterceptors? interceptors;
 
-  static final BaseOptions _options = BaseOptions(
+  late final BaseOptions _options = BaseOptions(
     connectTimeout: connectTimeout,
     receiveTimeout: receiveTimeout,
   );
 
   /// request method
-  static Future<T> request<T>(
+  Future<T> request<T>(
     String url, {
     dynamic data,
     HttpMethod method = HttpMethod.post,
@@ -86,7 +91,7 @@ class _Http {
     return result;
   }
 
-  static String _getMethod(HttpMethod method) {
+  String _getMethod(HttpMethod method) {
     switch (method.index) {
       case 1:
         return 'POST';
@@ -102,7 +107,7 @@ class _Http {
   }
 
   /// 创建 dio 实例对象
-  static Future<Dio?> createInstance() async {
+  Future<Dio?> createInstance() async {
     if (_dio == null) {
       _dio = Dio(_options);
 
@@ -110,39 +115,19 @@ class _Http {
         _dio!.interceptors.add(i);
       });
 
-      // if (kIsWeb) {
-      //   // var adapter = BrowserHttpClientAdapter();
-      //   // adapter.withCredentials = withCredentials!;
-      //   // _dio!.httpClientAdapter = adapter;
-      // } else {
-      //   var appDocDir = await getApplicationDocumentsDirectory();
-      //   String appDocPath = appDocDir.path;
-      //   PersistCookieJar cookieJar = PersistCookieJar(storage: FileStorage('$appDocPath/.cookies/'));
-      //   _dio!.interceptors.add(CookieManager(cookieJar));
-      // }
+      /// 设置代理
+      if (proxyUrl != null) {
+        _dio!.httpClientAdapter = IOHttpClientAdapter(
+          createHttpClient: () {
+            HttpClient client = HttpClient()..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+            client.findProxy = (uri) {
+              return "PROXY $proxyUrl";
+            };
+            return client;
+          },
+        );
+      }
 
-      // /// 设置代理
-      // if (PROXY_URL != null) {
-      //   _dio!.httpClientAdapter = IOHttpClientAdapter(
-      //     createHttpClient: () {
-      //       HttpClient client = HttpClient()..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
-      //       client.findProxy = (uri) {
-      //         return "PROXY $PROXY_URL";
-      //       };
-      //       return client;
-      //     },
-      //   );
-      // }
-
-      /// 忽略证书
-      // if (ignoreCertificate) {
-      //   _dio!.httpClientAdapter = IOHttpClientAdapter(
-      //     createHttpClient: () {
-      //       HttpClient client = new HttpClient()..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
-      //       return client;
-      //     },
-      //   );
-      // }
       if (debug) {
         _dio!.interceptors.add(
           PrettyDioLogger(

@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../data/utils/utils.dart';
-import 'upgrade_dialog_model.dart';
+import '../../../data/models/upgrade_model.dart';
 
 class UpgradeDialog extends StatelessWidget {
-  final UpgradeDialogModel data;
+  final UpgradeModel data;
 
   const UpgradeDialog({super.key, required this.data});
 
@@ -26,12 +26,15 @@ class UpgradeDialog extends StatelessWidget {
           ),
         ),
         actions: <Widget>[
+          if (!data.isForceUpgrade)
+            CupertinoDialogAction(
+              onPressed: Get.back,
+              child: Text(S.current.cancel, style: const TextStyle(color: Colors.black)),
+            ),
           CupertinoDialogAction(
-            onPressed: Get.back,
-            child: Text(S.current.cancel, style: const TextStyle(color: Colors.black)),
-          ),
-          CupertinoDialogAction(
-            onPressed: utils.upgrade.install,
+            onPressed: () {
+              utils.upgrade(data);
+            },
             child: Text(S.current.confirm, style: const TextStyle(color: Colors.blue)),
           ),
         ],

@@ -52,10 +52,11 @@ dependencies:
   package_info_plus:
   flutter_inappwebview:
   dio:
-  app_installer:
   logger:
   cookie_jar:
   pretty_dio_logger:
+  open_file:
+  url_launcher:
   
 
 dev_dependencies:

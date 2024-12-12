@@ -1,4 +1,4 @@
-class UpgradeDialogModel {
+class UpgradeModel {
   /// 强制更新
   final bool isForceUpgrade;
 
@@ -17,7 +17,7 @@ class UpgradeDialogModel {
   /// 新版本下载地址
   final String fileUrl;
 
-  UpgradeDialogModel({
+  UpgradeModel({
     this.isForceUpgrade = false,
     this.isSilentUpgrade = false,
     this.isUpgrade = false,

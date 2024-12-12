@@ -13,29 +13,38 @@ part of 'utils.dart';
 //////////////////////////////////////////////////////////////////////////
 
 class _Upgrade with PermissionMixin {
-  _Upgrade._();
-
   bool _isUpgrade = false;
 
-  late UpgradeDialogModel _dialogModel;
+  bool _idDownloading = false;
 
-  /// 检测更新
-  void checkUpgrade(UpgradeDialogModel model) {
-    _dialogModel = model;
-    if (!model.isUpgrade) return;
-    Get.dialog(UpgradeDialog(data: model));
-  }
-
-  void install() {
-    _upgrade();
-  }
-
-  void _upgrade() {
+  /// 更新APP
+  void inspect() {
     if (_isUpgrade) return;
     _isUpgrade = true;
+    utils.exceptionCapture(() async {
+      UpgradeModel model = await checkUpgrade();
+      if (model.isUpgrade) {
+        if (model.isSilentUpgrade) {
+          upgrade(model);
+        } else {
+          Get.dialog(UpgradeDialog(data: model));
+        }
+      }
+    });
+  }
+
+  /// 返回更新信息
+  Future<UpgradeModel> checkUpgrade() async {
+    return UpgradeModel();
+  }
+
+  /// 开始更新
+  void upgrade(UpgradeModel data) {
+    if (_idDownloading) return;
+    _idDownloading = true;
 
     if (Platform.isAndroid) {
-      _downloadFile();
+      _downloadFile(data);
     } else {
       print('123123');
       // _installApk(_dialogModel.fileUrl);
@@ -43,13 +52,13 @@ class _Upgrade with PermissionMixin {
   }
 
   /// 下载apk
-  void _downloadFile() async {
+  void _downloadFile(UpgradeModel data) async {
     /// 保存地址
     String directory = p.join(utils.config.directory.path, 'apk');
     Directory(directory).createSync(recursive: true);
 
     /// 文件名
-    String filename = p.basename(_dialogModel.fileUrl);
+    String filename = p.basename(data.fileUrl);
 
     /// 判断文件是否存在
     String savePath = p.join(directory, filename);
@@ -60,7 +69,7 @@ class _Upgrade with PermissionMixin {
 
     /// 开始下载
     await Dio().download(
-      _dialogModel.fileUrl,
+      data.fileUrl,
       savePath,
       onReceiveProgress: (count, total) {
         print((count / total * 100).toStringAsFixed(2));
@@ -74,11 +83,14 @@ class _Upgrade with PermissionMixin {
     await requestStoragePermission();
     switch (Platform.operatingSystem) {
       case 'android':
+        await requestInstallPermission();
+        await OpenFile.open(filePath, type: 'application/vnd.android.package-archive');
+        break;
       case 'ios':
-        await AppInstaller.installApk(filePath);
         break;
     }
 
     _isUpgrade = false;
+    _idDownloading = false;
   }
 }

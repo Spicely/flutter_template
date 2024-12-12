@@ -64,52 +64,6 @@ class _Tools {
     return v + unitArr[index];
   }
 
-  /// 纯数字
-  final String digitRegex = "[0-9]+";
-
-  /// 含有数字
-  final String containDigitRegex = ".*[0-9].*";
-
-  /// 纯字母
-  final String letterRegex = "[a-zA-Z]+";
-
-  /// 包含字母
-  final String smallContainLetterRegex = ".*[a-z].*";
-
-  /// 包含字母
-  final String bigContainLetterRegex = ".*[A-Z].*";
-
-  /// 包含字母
-  final String containLetterRegex = ".*[a-zA-Z].*";
-
-  /// 纯中文
-  final String chineseRegex = "[\u4e00-\u9fa5]";
-
-  /// 仅仅包含字母和数字
-  final String letterDigitRegex = "^[a-z0-9A-Z]+\$";
-
-  final String chineseLetterRegex = "([\u4e00-\u9fa5]+|[a-zA-Z]+)";
-
-  final String chineseLetterDigitRegex = "^[a-z0-9A-Z\u4e00-\u9fa5]+\$";
-
-  /// 纯数字
-  bool isOnly(String input) {
-    if (input.isEmpty) return false;
-    return RegExp(digitRegex).hasMatch(input);
-  }
-
-  /// 含有数字
-  bool hasDigit(String input) {
-    if (input.isEmpty) return false;
-    return RegExp(containDigitRegex).hasMatch(input);
-  }
-
-  /// 是否包含中文
-  bool isChinese(String input) {
-    if (input.isEmpty) return false;
-    return RegExp(chineseRegex).hasMatch(input);
-  }
-
   /// 判断为null 或者空字符串
   bool isEmpty(dynamic data) {
     switch (data) {

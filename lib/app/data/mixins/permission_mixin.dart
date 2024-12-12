@@ -42,9 +42,21 @@ mixin PermissionMixin {
 
   /// 获取存储权限
   Future<void> requestStoragePermission() async {
-    if (await Permission.storage.request().isGranted) {
+    try {
+      if (await Permission.storage.request().isGranted) {
+        return;
+      }
+      throw PermissionException(PermissionType.storage, '存储权限获取失败');
+    } catch (e) {
+      /// 报错直接通过 因为高版本不需要获取
+    }
+  }
+
+  /// 安装权限
+  Future<void> requestInstallPermission() async {
+    if (await Permission.requestInstallPackages.request().isGranted) {
       return;
     }
-    throw PermissionException(PermissionType.storage, '存储权限获取失败');
+    throw PermissionException(PermissionType.installPackages, '安装权限获取失败');
   }
 }

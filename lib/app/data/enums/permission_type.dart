@@ -6,4 +6,6 @@ enum PermissionType {
   microphone,
 
   storage,
+
+  installPackages,
 }
