@@ -46,36 +46,41 @@ class _Upgrade with PermissionMixin {
     if (Platform.isAndroid) {
       _downloadFile(data);
     } else {
-      print('123123');
-      // _installApk(_dialogModel.fileUrl);
+      _install(data.fileUrl);
     }
   }
 
   /// 下载apk
   void _downloadFile(UpgradeModel data) async {
-    /// 保存地址
-    String directory = p.join(utils.config.directory.path, 'apk');
-    Directory(directory).createSync(recursive: true);
+    try {
+      /// 保存地址
+      String directory = p.join(utils.config.directory.path, 'apk');
+      Directory(directory).createSync(recursive: true);
 
-    /// 文件名
-    String filename = p.basename(data.fileUrl);
+      /// 文件名
+      String filename = p.basename(data.fileUrl);
 
-    /// 判断文件是否存在
-    String savePath = p.join(directory, filename);
-    if (File(savePath).existsSync()) {
+      /// 判断文件是否存在
+      String savePath = p.join(directory, filename);
+      if (File(savePath).existsSync()) {
+        await _install(savePath);
+        return;
+      }
+
+      /// 开始下载
+      await Dio().download(
+        data.fileUrl,
+        savePath,
+        onReceiveProgress: (count, total) {
+          print((count / total * 100).toStringAsFixed(2));
+        },
+      );
       await _install(savePath);
-      return;
+    } catch (e) {
+      _isUpgrade = false;
+      _idDownloading = false;
+      utils.logger.e('下载失败,请检查网络连接');
     }
-
-    /// 开始下载
-    await Dio().download(
-      data.fileUrl,
-      savePath,
-      onReceiveProgress: (count, total) {
-        print((count / total * 100).toStringAsFixed(2));
-      },
-    );
-    await _install(savePath);
   }
 
   /// 安装应用
@@ -86,7 +91,14 @@ class _Upgrade with PermissionMixin {
         await requestInstallPermission();
         await OpenFile.open(filePath, type: 'application/vnd.android.package-archive');
         break;
+
       case 'ios':
+        Uri uri = Uri.parse('https://apps.apple.com/cn/app/id$filePath');
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri);
+        } else {
+          utils.logger.e('无法打开App Store链接,请联系客服');
+        }
         break;
     }
 
