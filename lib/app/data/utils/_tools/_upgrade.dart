@@ -26,7 +26,7 @@ class _Upgrade with PermissionMixin {
   void inspect() {
     if (isUpgrade.value) return;
     isUpgrade.value = true;
-    utils.exceptionCapture(() async {
+    utils.tools.exceptionCapture(() async {
       data.value = await checkUpgrade();
       if (data.value.isUpgrade) {
         if (data.value.isSilentUpgrade) {

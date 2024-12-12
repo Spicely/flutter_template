@@ -3,11 +3,38 @@ part of '../utils.dart';
 class _Tools {
   _Tools._();
 
+  Future<void> init() async {
+    await _getVersion();
+  }
+
+  /// 异常捕获
+  Future<void> exceptionCapture(Function() cb, {void Function(DioException)? dioError, void Function(Object)? error}) async {
+    try {
+      await cb();
+    } on DioException catch (e) {
+      dioError != null ? dioError.call(e) : utils.error.dioError(e);
+    } catch (e) {
+      error != null ? error.call(e) : utils.error.error(e);
+    }
+  }
+
+  /// 版本号
+  String version = '';
+
   /// 是否是桌面
   bool isDesktop = (Platform.isMacOS || Platform.isWindows || Platform.isLinux) ? true : false;
 
   /// 是否是移动端
   bool isMobile = (Platform.isAndroid || Platform.isIOS) ? true : false;
+
+  /// 获取版本号
+  Future<void> _getVersion() async {
+    // 获取包信息
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    // 获取版本号和构建号
+    version = packageInfo.version;
+  }
 
   String get platform {
     if (Platform.isAndroid) {

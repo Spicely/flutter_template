@@ -13,15 +13,13 @@ part of 'utils.dart';
 //////////////////////////////////////////////////////////////////////////
 
 class _Error {
-  final Logger logger;
-
-  _Error._(this.logger);
+  _Error._();
 
   void dioError(DioException dioError) {
-    logger.e(dioError);
+    utils.logger.e(dioError);
   }
 
   void error(Object error) {
-    logger.e(error);
+    utils.logger.e(error);
   }
 }

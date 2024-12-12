@@ -22,9 +22,6 @@ class _Config {
   /// 压缩输出路径
   late String compressedOutputPath;
 
-  /// 版本号
-  String version = '';
-
   /// 应用名称
   String appName = 'Template';
 
@@ -37,16 +34,34 @@ class _Config {
     await IsarManager.init(directory.path);
     await CompressManager.init(CompressParams(outputDir: compressedOutputPath));
     await SystemManager.init();
-    await _getVersion();
     debugPrint(directory.path);
-  }
 
-  /// 获取版本号
-  Future<void> _getVersion() async {
-    // 获取包信息
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    utils._http.baseUrl = kReleaseMode ? Env.baseUrl : Env.baseUrlDev;
 
-    // 获取版本号和构建号
-    version = packageInfo.version;
+    utils._http.interceptors = (Dio? d) {
+      return [
+        InterceptorsWrapper(
+          onRequest: (options, handler) async {
+            options.headers = {
+              ...options.headers,
+
+              /// 增加固定参数
+              'channel': 'ACJL001',
+            };
+            handler.next(options);
+          },
+          onResponse: (Response<dynamic> response, ResponseInterceptorHandler handler) {
+            switch (response.data['code']) {
+              case 100:
+                response.data = response.data['data'];
+                handler.next(response);
+                break;
+              default:
+                handler.reject(DioException(requestOptions: response.requestOptions, error: response.data['code'], message: response.data['message']));
+            }
+          },
+        ),
+      ];
+    };
   }
 }

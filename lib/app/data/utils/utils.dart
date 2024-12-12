@@ -32,64 +32,26 @@ part '_extend_upgrade.dart';
 class _Utils {
   _Utils._();
 
-  final Logger logger = Logger(printer: PrettyPrinter(methodCount: 2, errorMethodCount: 8, lineLength: 120, colors: true, printEmojis: true));
+  final _Tools tools = _Tools._();
 
-  late _Apis apis = _Apis._(_http);
-
-  _Config config = _Config._();
-
-  late _Error error = _Error._(logger);
+  final _ExtendUpgrade upgrade = _ExtendUpgrade._();
 
   final _Http _http = _Http._(debug: kDebugMode);
 
-  _Plugins plugins = _Plugins._();
+  final Logger logger = Logger(printer: PrettyPrinter(methodCount: 2, errorMethodCount: 8, lineLength: 120, colors: true, printEmojis: true));
 
-  _Tools tools = _Tools._();
+  final _Config config = _Config._();
 
-  _ExtendUpgrade upgrade = _ExtendUpgrade._();
+  final _Error error = _Error._();
+
+  final _Plugins plugins = _Plugins._();
+
+  late _Apis apis = _Apis._(_http);
 
   Future<void> init() async {
     await config.init();
     await plugins.init();
-
-    _http.baseUrl = kReleaseMode ? Env.baseUrl : Env.baseUrlDev;
-
-    _http.interceptors = (Dio? d) {
-      return [
-        InterceptorsWrapper(
-          onRequest: (options, handler) async {
-            options.headers = {
-              ...options.headers,
-
-              /// 增加固定参数
-              'channel': 'ACJL001',
-            };
-            handler.next(options);
-          },
-          onResponse: (Response<dynamic> response, ResponseInterceptorHandler handler) {
-            switch (response.data['code']) {
-              case 100:
-                response.data = response.data['data'];
-                handler.next(response);
-                break;
-              default:
-                handler.reject(DioException(requestOptions: response.requestOptions, error: response.data['code'], message: response.data['message']));
-            }
-          },
-        ),
-      ];
-    };
-  }
-
-  /// 异常捕获
-  Future<void> exceptionCapture(Function() cb, {void Function(DioException)? dioError, void Function(Object)? error}) async {
-    try {
-      await cb();
-    } on DioException catch (e) {
-      dioError != null ? dioError.call(e) : this.error.dioError(e);
-    } catch (e) {
-      error != null ? error.call(e) : this.error.error(e);
-    }
+    await tools.init();
   }
 }
 
