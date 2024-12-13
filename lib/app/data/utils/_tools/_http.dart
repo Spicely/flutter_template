@@ -2,6 +2,18 @@
 
 part of '../utils.dart';
 
+/////////////////////////////////////////////////////////////////////////
+///
+/// All rights reserved.
+///
+/// author: Spicely
+///
+/// Summary: 网络请求工具类
+///
+/// Date: 2024年12月13日 09:34:17 Friday
+///
+//////////////////////////////////////////////////////////////////////////
+
 typedef HttpInterceptors = List<Interceptor> Function(Dio? dio);
 
 enum HttpMethod {
