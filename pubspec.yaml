@@ -57,6 +57,8 @@ dependencies:
   pretty_dio_logger:
   open_file:
   url_launcher:
+  shimmer:
+  cached_network_image:
   
 
 dev_dependencies:
