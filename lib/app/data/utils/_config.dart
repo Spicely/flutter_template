@@ -35,33 +35,5 @@ class _Config {
     await CompressManager.init(CompressParams(outputDir: compressedOutputPath));
     await SystemManager.init();
     debugPrint(directory.path);
-
-    utils._http.baseUrl = kReleaseMode ? Env.baseUrl : Env.baseUrlDev;
-
-    utils._http.interceptors = (Dio? d) {
-      return [
-        InterceptorsWrapper(
-          onRequest: (options, handler) async {
-            options.headers = {
-              ...options.headers,
-
-              /// 增加固定参数
-              'channel': 'ACJL001',
-            };
-            handler.next(options);
-          },
-          onResponse: (Response<dynamic> response, ResponseInterceptorHandler handler) {
-            switch (response.data['code']) {
-              case 100:
-                response.data = response.data['data'];
-                handler.next(response);
-                break;
-              default:
-                handler.reject(DioException(requestOptions: response.requestOptions, error: response.data['code'], message: response.data['message']));
-            }
-          },
-        ),
-      ];
-    };
   }
 }

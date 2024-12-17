@@ -36,8 +36,6 @@ class _Utils {
 
   final _ExtendUpgrade upgrade = _ExtendUpgrade._();
 
-  final _Http _http = _Http._(debug: kDebugMode);
-
   final Logger logger = Logger(printer: PrettyPrinter(methodCount: 2, errorMethodCount: 8, lineLength: 120, colors: true, printEmojis: true));
 
   final _Config config = _Config._();
@@ -46,12 +44,13 @@ class _Utils {
 
   final _Plugins plugins = _Plugins._();
 
-  late _Apis apis = _Apis._(_http);
+  late _Apis apis = _Apis._();
 
   Future<void> init() async {
     await config.init();
     await plugins.init();
     await tools.init();
+    apis.init();
   }
 }
 
