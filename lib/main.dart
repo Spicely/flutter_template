@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_template/app/data/utils/utils.dart';
 import 'package:get/get.dart';
 
 import 'app/controllers/global_controller.dart';
 import 'app/data/manager/isar_manager/isar_manager.dart';
 import 'app/data/manager/isar_manager/models/config_model/config_model.dart';
 import 'app/data/theme/theme_custom.dart';
+import 'app/data/utils/utils.dart';
 import 'app/routes/app_pages.dart';
 import 'generated/l10n.dart';
 

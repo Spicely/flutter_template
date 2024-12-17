@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/app/components/cached_image/cached_image.dart';
-
 import 'package:get/get.dart';
 
+import '../../../components/cached_image/cached_image.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {

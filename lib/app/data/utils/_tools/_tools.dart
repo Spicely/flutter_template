@@ -1,17 +1,5 @@
 part of '../utils.dart';
 
-/////////////////////////////////////////////////////////////////////////
-///
-/// All rights reserved.
-///
-/// author: Spicely
-///
-/// Summary: 工具类
-///
-/// Date: 2024年12月13日 09:34:04 Friday
-///
-//////////////////////////////////////////////////////////////////////////
-
 class _Tools {
   _Tools._();
 
@@ -106,12 +94,12 @@ class _Tools {
   /// 判断为null 或者空字符串
   bool isEmpty(dynamic data) {
     switch (data) {
-      case int _ when data == 0:
-        return true;
-      case String _ when data.isEmpty:
-        return true;
+      case int _:
+        return data == 0;
+      case String _:
+        return data.isEmpty;
       default:
-        return false;
+        return true;
     }
   }
 
