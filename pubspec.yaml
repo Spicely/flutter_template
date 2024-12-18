@@ -59,6 +59,7 @@ dependencies:
   url_launcher:
   shimmer:
   cached_network_image:
+  flutter_spinkit:
   
 
 dev_dependencies:
