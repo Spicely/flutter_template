@@ -48,7 +48,7 @@ class _Upgrade with PermissionMixin {
     if (isDownloading.value) return;
     isDownloading.value = true;
 
-    if (Platform.isAndroid) {
+    if (Platform.isAndroid || Platform.isWindows || Platform.isMacOS) {
       _downloadFile();
     } else {
       _install(data.value.fileUrl);
@@ -59,7 +59,7 @@ class _Upgrade with PermissionMixin {
   void _downloadFile() async {
     try {
       /// 保存地址
-      String directory = p.join(utils.config.directory.path, 'apk');
+      String directory = p.join(utils.config.directory.path, 'downloads');
       Directory(directory).createSync(recursive: true);
 
       /// 文件名

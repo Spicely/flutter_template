@@ -75,8 +75,6 @@ class SystemManager {
             case _SystemAction.readerDirectory:
               _onEvent((listener) => listener.onFileReader(msg.data as SystemFileEntity));
               break;
-            default:
-              break;
           }
         }
         if (msg is SendPort) {
@@ -104,7 +102,6 @@ class SystemManager {
             case _SystemAction.readerDirectory:
               _SystemMethod.directoryList(msg.path, task.sendPort);
               break;
-            default:
           }
         }
       } catch (e) {

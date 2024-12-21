@@ -120,8 +120,6 @@ class CompressManager {
           case CompressStatus.fail:
             _onEvent((v) => v.onCompressFail(msg));
             break;
-          default:
-            break;
         }
       }
       if (msg is SendPort) {
