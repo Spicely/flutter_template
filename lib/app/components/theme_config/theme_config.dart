@@ -30,6 +30,8 @@ Widget _loadFailWidget(BuildContext context, Object error, void reload) {
 }
 
 class ThemeConfig {
+  final double radius;
+
   /// 加载动画
   Widget Function(BuildContext context) loadingWidget;
 
@@ -39,6 +41,7 @@ class ThemeConfig {
   ThemeConfig({
     this.loadingWidget = _loadingWidget,
     this.loadFailWidget = _loadFailWidget,
+    this.radius = 8,
   });
 }
 

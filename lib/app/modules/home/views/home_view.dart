@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../components/cached_image/cached_image.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -13,18 +12,24 @@ class HomeView extends GetView<HomeController> {
         title: const Text('HomeView'),
         centerTitle: true,
       ),
-      body: ListView(
+      body: PageView(
+        controller: controller.pageController,
         children: const [
-          Center(
-            child: CachedImage(
-              height: 100,
-              width: 100,
-              circular: 10,
-              fit: BoxFit.cover,
-              imageUrl: 'https://pics6.baidu.com/feed/8ad4b31c8701a18b47b283e906a51f072938fe51.jpeg@f_auto?token=80d5edb0168c8df3ce9a10ace741f843',
-            ),
-          ),
+          Center(child: Text('Home Page')),
+          Center(child: Text('Apps Page')),
+          Center(child: Text('User Page')),
         ],
+      ),
+      bottomNavigationBar: Obx(
+        () => BottomNavigationBar(
+          currentIndex: controller.currentIndex.value,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.apps), label: 'Apps'),
+            BottomNavigationBarItem(icon: Icon(Icons.people), label: 'User'),
+          ],
+          onTap: controller.onChangeIndex,
+        ),
       ),
     );
   }

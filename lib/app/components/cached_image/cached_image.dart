@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../data/utils/utils.dart';
+import '../theme_config/theme_config.dart';
 
 /////////////////////////////////////////////////////////////////////////
 ///
@@ -56,7 +57,7 @@ class CachedImage extends StatelessWidget {
 
   final double? height;
 
-  final double circular;
+  final BorderRadiusGeometry? borderRadius;
 
   final BoxFit? fit;
 
@@ -76,7 +77,7 @@ class CachedImage extends StatelessWidget {
     this.imageUrl,
     this.width,
     this.height,
-    this.circular = 0,
+    this.borderRadius,
     this.fit,
     this.assetUrl,
     this.imageColor,
@@ -89,10 +90,12 @@ class CachedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final borderRadius = this.borderRadius ?? BorderRadius.circular(themeConfig.radius);
+
     if (file != null) {
       if (width != null && height != null) {
         return ClipRRect(
-          borderRadius: BorderRadius.circular(circular),
+          borderRadius: borderRadius,
           child: Image(
             image: FileImage(File(file!.path), scale: 2.0),
             fit: fit,
@@ -104,7 +107,7 @@ class CachedImage extends StatelessWidget {
         );
       } else {
         return ClipRRect(
-          borderRadius: BorderRadius.circular(circular),
+          borderRadius: borderRadius,
           child: Image(
             image: FileImage(File(file!.path)),
             fit: fit,
@@ -119,7 +122,7 @@ class CachedImage extends StatelessWidget {
 
     if (utils.tools.isNotEmpty(assetUrl)) {
       return ClipRRect(
-        borderRadius: BorderRadius.circular(circular),
+        borderRadius: borderRadius,
         child: Image(
           image: AssetImage(assetUrl!, package: package),
           fit: fit,
@@ -133,7 +136,7 @@ class CachedImage extends StatelessWidget {
 
     if (memory != null) {
       return ClipRRect(
-        borderRadius: BorderRadius.circular(circular),
+        borderRadius: borderRadius,
         child: Image(
           image: MemoryImage(memory!),
           fit: fit,
@@ -146,7 +149,7 @@ class CachedImage extends StatelessWidget {
     }
     if (utils.tools.isNotEmpty(imageUrl)) {
       return ClipRRect(
-        borderRadius: BorderRadius.circular(circular),
+        borderRadius: borderRadius,
         child: CachedNetworkImage(
           width: width,
           height: height,
@@ -159,7 +162,7 @@ class CachedImage extends StatelessWidget {
       );
     }
     return ClipRRect(
-      borderRadius: BorderRadius.circular(circular),
+      borderRadius: borderRadius,
       child: Shimmer.fromColors(
         baseColor: Colors.grey.shade200,
         highlightColor: Colors.grey.shade100,

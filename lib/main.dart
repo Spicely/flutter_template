@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'app/controllers/global_controller.dart';
 import 'app/data/manager/isar_manager/isar_manager.dart';
@@ -20,29 +21,34 @@ void main() async {
   Get.put(GlobalController(config: config));
 
   runApp(
-    GetMaterialApp(
-      title: utils.config.appName,
-      initialRoute: AppPages.INITIAL,
-      theme: ThemeCustom.light,
-      darkTheme: ThemeCustom.dark,
-      // themeMode: ThemeMode.system,
-      themeMode: ThemeMode.dark,
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        S.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      localeListResolutionCallback: (locales, supportedLocales) {
-        debugPrint('当前系统语言环境$locales');
-        return;
+    ScreenUtilInit(
+      designSize: const Size(390, 844),
+      builder: (context, child) {
+        return GetMaterialApp(
+          title: utils.config.appName,
+          initialRoute: AppPages.INITIAL,
+          theme: ThemeCustom.light,
+          darkTheme: ThemeCustom.dark,
+          // themeMode: ThemeMode.system,
+          themeMode: ThemeMode.dark,
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            S.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          localeListResolutionCallback: (locales, supportedLocales) {
+            debugPrint('当前系统语言环境$locales');
+            return;
+          },
+          localeResolutionCallback: (locale, supportedLocales) {
+            debugPrint('当前系统语言环境$locale');
+            return locale;
+          },
+          getPages: AppPages.routes,
+        );
       },
-      localeResolutionCallback: (locale, supportedLocales) {
-        debugPrint('当前系统语言环境$locale');
-        return locale;
-      },
-      getPages: AppPages.routes,
     ),
   );
 }

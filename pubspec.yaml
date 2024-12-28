@@ -60,6 +60,7 @@ dependencies:
   shimmer:
   cached_network_image:
   flutter_spinkit:
+  flutter_screenutil:
   
 
 dev_dependencies:

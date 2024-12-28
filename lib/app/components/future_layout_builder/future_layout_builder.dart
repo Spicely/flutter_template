@@ -29,6 +29,8 @@ class FutureLayoutBuilder<T> extends StatefulWidget {
 
   final ThemeConfig? config;
 
+  final Duration? delayed;
+
   /// 是否需要拉取
   final T? data;
 
@@ -39,6 +41,7 @@ class FutureLayoutBuilder<T> extends StatefulWidget {
     this.config,
     this.data,
     this.controller,
+    this.delayed,
   });
 
   @override
@@ -74,7 +77,7 @@ class _FutureLayoutBuilderState<T> extends State<FutureLayoutBuilder<T>> {
   @override
   Widget build(BuildContext context) {
     if (widget.data != null) {
-      return widget.builder(widget.data!);
+      return widget.builder(widget.data as T);
     }
     return FutureBuilder(
       key: key,
@@ -103,8 +106,18 @@ class _FutureLayoutBuilderState<T> extends State<FutureLayoutBuilder<T>> {
 
   Future<dynamic> onFuture() async {
     try {
-      dynamic res = await widget.future?.call();
-      return res ?? true;
+      if (widget.future == null) {
+        await Future.delayed(Duration.zero);
+        return true;
+      }
+
+      final List<Future<dynamic>> futures = [
+        Future.delayed(widget.delayed ?? const Duration(seconds: 2)),
+        widget.future!.call(),
+      ];
+
+      dynamic res = await Future.wait(futures);
+      return res[1] ?? true;
     } catch (e) {
       return e;
     }
