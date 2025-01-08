@@ -132,4 +132,19 @@ class _Tools {
       return (number / 10000).toStringAsFixed(1) + unit;
     }
   }
+
+  /// 判断值是否为空
+  ///
+  /// 如果为空则返回默认值
+  ///
+  /// 如果不为空则返回属性值
+  T getValue<T>(T? obj, T defaultValue) {
+    return obj == null
+        ? defaultValue
+        : obj is String
+            ? obj.isEmpty
+                ? defaultValue
+                : obj
+            : obj;
+  }
 }

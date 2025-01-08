@@ -11,15 +11,22 @@ class IsarConfigManager {
 
   /// 获取配置信息
   Future<ConfigModel> get() async {
-    ConfigModel? config = await collection.where().findFirst();
-    return config ?? ConfigModel();
+    List<ConfigModel> configs = await collection.where().findAll();
+    if (configs.isEmpty) {
+      ConfigModel config = ConfigModel();
+      config = await save(config);
+      return config;
+    } else {
+      return configs.first;
+    }
   }
 
   /// 保存配置信息
-  Future<void> save(ConfigModel config) async {
-    Completer completer = Completer();
+  Future<ConfigModel> save(ConfigModel config) async {
+    Completer<ConfigModel> completer = Completer<ConfigModel>();
     await isar.writeTxn(() async {
-      await collection.put(config);
+      int id = await collection.put(config);
+      config.id ??= id;
       completer.complete(config);
     });
     return completer.future;

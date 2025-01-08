@@ -76,6 +76,7 @@ ConfigModel _configModelDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = ConfigModel(
+    id: id,
     isAgreement: reader.readBoolOrNull(offsets[0]) ?? false,
   );
   return object;
@@ -96,7 +97,7 @@ P _configModelDeserializeProp<P>(
 }
 
 Id _configModelGetId(ConfigModel object) {
-  return object.id;
+  return object.id ?? Isar.autoIncrement;
 }
 
 List<IsarLinkBase<dynamic>> _configModelGetLinks(ConfigModel object) {
@@ -104,7 +105,9 @@ List<IsarLinkBase<dynamic>> _configModelGetLinks(ConfigModel object) {
 }
 
 void _configModelAttach(
-    IsarCollection<dynamic> col, Id id, ConfigModel object) {}
+    IsarCollection<dynamic> col, Id id, ConfigModel object) {
+  object.id = id;
+}
 
 extension ConfigModelQueryWhereSort
     on QueryBuilder<ConfigModel, ConfigModel, QWhere> {
@@ -239,8 +242,24 @@ extension ConfigModelQueryWhere
 
 extension ConfigModelQueryFilter
     on QueryBuilder<ConfigModel, ConfigModel, QFilterCondition> {
+  QueryBuilder<ConfigModel, ConfigModel, QAfterFilterCondition> idIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'id',
+      ));
+    });
+  }
+
+  QueryBuilder<ConfigModel, ConfigModel, QAfterFilterCondition> idIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'id',
+      ));
+    });
+  }
+
   QueryBuilder<ConfigModel, ConfigModel, QAfterFilterCondition> idEqualTo(
-      Id value) {
+      Id? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -250,7 +269,7 @@ extension ConfigModelQueryFilter
   }
 
   QueryBuilder<ConfigModel, ConfigModel, QAfterFilterCondition> idGreaterThan(
-    Id value, {
+    Id? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -263,7 +282,7 @@ extension ConfigModelQueryFilter
   }
 
   QueryBuilder<ConfigModel, ConfigModel, QAfterFilterCondition> idLessThan(
-    Id value, {
+    Id? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -276,8 +295,8 @@ extension ConfigModelQueryFilter
   }
 
   QueryBuilder<ConfigModel, ConfigModel, QAfterFilterCondition> idBetween(
-    Id lower,
-    Id upper, {
+    Id? lower,
+    Id? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {

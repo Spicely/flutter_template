@@ -47,6 +47,14 @@ void main() async {
             return locale;
           },
           getPages: AppPages.routes,
+          builder: (context, child) {
+            return GestureDetector(
+              onTap: () {
+                primaryFocus?.unfocus();
+              },
+              child: child ?? const SizedBox(),
+            );
+          },
         );
       },
     ),
