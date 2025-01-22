@@ -9,10 +9,7 @@
     dart pub global activate spider
 
     /// 资源处理
-    spider build
-
-    /// 监视给定目录中的文件更改并自动重建 dart 代码。使用以下命令监视更改：
-    spider build --watch
+    fluttergen
 
     /// 生成平台文件
     flutter create . --org com.muka

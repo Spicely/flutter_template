@@ -104,8 +104,8 @@ class _Tools {
   }
 
   /// 判断为null 或者空字符串
-  bool isNotEmpty(String? data) {
-    return data != null && data.isNotEmpty;
+  bool isNotEmpty(dynamic data) {
+    return !isEmpty(data);
   }
 
   /// 判断包含数字/字母

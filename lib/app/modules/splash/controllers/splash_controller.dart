@@ -1,21 +1,18 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../../../resources/resources.dart';
 import '../../../components/dialog/privacy_dialog/privacy_dialog.dart';
 import '../../../controllers/global_controller.dart';
 import '../../../data/manager/isar_manager/isar_manager.dart';
 import '../../../routes/app_pages.dart';
 
 class SplashController extends GetxController {
-  String splashBg = Images.splash;
-
-  GlobalController globalController = Get.find<GlobalController>();
+  GlobalController g = Get.find<GlobalController>();
 
   @override
   void onReady() {
     super.onReady();
-    if (globalController.config.isAgreement) {
+    if (g.config.isAgreement) {
       Future.delayed(const Duration(seconds: 2), () {
         Get.offAllNamed(Routes.HOME);
       });
@@ -33,7 +30,7 @@ class SplashController extends GetxController {
 
   void onAgree() {
     Get.offAllNamed(Routes.HOME);
-    globalController.config.isAgreement = true;
-    IsarManager.configManager.save(globalController.config);
+    g.config.isAgreement = true;
+    IsarManager.configManager.save(g.config);
   }
 }

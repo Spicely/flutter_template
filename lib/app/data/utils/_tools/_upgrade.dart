@@ -23,7 +23,7 @@ class _Upgrade with PermissionMixin {
   Rx<UpgradeModel> data = UpgradeModel().obs;
 
   /// 更新APP
-  void inspect() {
+  void inspect({bool callToast = true}) {
     if (isUpgrade.value) return;
     isUpgrade.value = true;
     utils.tools.exceptionCapture(() async {
@@ -34,6 +34,11 @@ class _Upgrade with PermissionMixin {
         } else {
           Get.dialog(const UpgradeDialog());
         }
+      } else {
+        isUpgrade.value = false;
+        if (callToast) {
+          noUpgradeToast();
+        }
       }
     });
   }
@@ -42,6 +47,9 @@ class _Upgrade with PermissionMixin {
   Future<UpgradeModel> checkUpgrade() async {
     return UpgradeModel();
   }
+
+  /// 无更新提示
+  void noUpgradeToast() {}
 
   /// 开始更新
   void upgrade() {
@@ -65,11 +73,12 @@ class _Upgrade with PermissionMixin {
       /// 文件名
       String filename = p.basename(data.value.fileUrl);
 
-      /// 判断文件是否存在
       String savePath = p.join(directory, filename);
+
+      /// 判断文件是否存在
       if (File(savePath).existsSync()) {
-        await _install(savePath);
-        return;
+        // await _install(savePath);
+        // return;
       }
 
       /// 开始下载

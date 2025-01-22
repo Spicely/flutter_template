@@ -21,10 +21,19 @@ class ExtendTheme extends ThemeExtension<ExtendTheme> {
 
   final Color subColor;
 
+  final List<Color> gradientColors;
+
+  final Color unSelectedColor;
+
+  final Color selectedColor;
+
   const ExtendTheme({
     required this.themeColor,
     required this.gray,
     required this.subColor,
+    required this.gradientColors,
+    required this.unSelectedColor,
+    required this.selectedColor,
   });
 
   @override
@@ -33,6 +42,9 @@ class ExtendTheme extends ThemeExtension<ExtendTheme> {
       themeColor: themeColor,
       gray: gray,
       subColor: subColor,
+      gradientColors: gradientColors,
+      unSelectedColor: unSelectedColor,
+      selectedColor: selectedColor,
     );
   }
 
@@ -45,19 +57,28 @@ class ExtendTheme extends ThemeExtension<ExtendTheme> {
       themeColor: Color.lerp(themeColor, other.themeColor, t)!,
       gray: Color.lerp(gray, other.gray, t)!,
       subColor: Color.lerp(subColor, other.subColor, t)!,
+      gradientColors: gradientColors,
+      unSelectedColor: Color.lerp(unSelectedColor, other.unSelectedColor, t)!,
+      selectedColor: Color.lerp(selectedColor, other.selectedColor, t)!,
     );
   }
 
   static const light = ExtendTheme(
     themeColor: Colors.white,
-    gray: Color.fromRGBO(32, 31, 41, 1),
-    subColor: Color.fromRGBO(178, 178, 178, 1),
+    gray: Color.fromRGBO(179, 179, 179, 1),
+    subColor: Color.fromRGBO(127, 127, 127, 1),
+    gradientColors: [Color.fromRGBO(37, 234, 231, 1), Color.fromRGBO(136, 249, 146, 1)],
+    unSelectedColor: Color.fromRGBO(246, 246, 246, 1),
+    selectedColor: Color.fromRGBO(229, 250, 240, 1),
   );
 
   static const dark = ExtendTheme(
     themeColor: Color.fromRGBO(32, 31, 41, 1),
-    gray: Color.fromRGBO(52, 51, 61, 1),
-    subColor: Color.fromRGBO(178, 178, 178, 1),
+    gray: Color.fromRGBO(179, 179, 179, 1),
+    subColor: Color.fromRGBO(127, 127, 127, 1),
+    gradientColors: [Color.fromRGBO(37, 234, 231, 1), Color.fromRGBO(136, 249, 146, 1)],
+    unSelectedColor: Color.fromRGBO(246, 246, 246, 1),
+    selectedColor: Color.fromRGBO(229, 250, 240, 1),
   );
 }
 
@@ -72,7 +93,22 @@ class _ExtendTheme {
 
   Color? get subColor => extendColors?.subColor;
 
-  BorderRadius borderRadius = BorderRadius.circular(8);
+  Color? get unSelectedColor => extendColors?.unSelectedColor;
+
+  Color? get selectedColor => extendColors?.selectedColor;
+
+  List<Color> get gradientColors => extendColors?.gradientColors ?? [];
+
+  Color unlockColor = const Color.fromRGBO(27, 38, 31, 1);
+
+  BorderRadius borderRadius = BorderRadius.circular(8.r);
+
+  List<Color> tagGradientColors = const [Color.fromRGBO(255, 109, 63, 1), Color.fromRGBO(255, 97, 75, 1)];
+
+  Color scaffoldBackgroundColor = const Color.fromRGBO(247, 247, 247, 1);
+
+  /// 排行颜色
+  final List<Color> colors = const [Color.fromRGBO(224, 46, 34, 1), Color.fromRGBO(255, 82, 27, 1), Color.fromRGBO(252, 195, 44, 1)];
 }
 
 /// 扩展BuildContext
