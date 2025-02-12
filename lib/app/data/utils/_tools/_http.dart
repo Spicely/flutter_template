@@ -95,7 +95,7 @@ class _Http {
     );
 
     if (convert != null) {
-      result = convert(response.data);
+      result = await compute((data) => convert(data), response.data);
     } else {
       result = response.data;
     }
