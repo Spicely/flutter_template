@@ -77,10 +77,10 @@ class _Http {
     headers = headers ?? {};
     contentType = contentType ?? Headers.jsonContentType;
 
-    Dio? dio = await createInstance();
+    _dio = await createInstance();
     T result;
 
-    Response<dynamic> response = await dio!.request(
+    Response<dynamic> response = await _dio!.request(
       url,
       queryParameters: method == HttpMethod.get ? data : null,
       data: method != HttpMethod.get ? data : null,
