@@ -17,9 +17,7 @@ import '../../../env/env.dart';
 import '../../components/cached_image/cached_image.dart';
 import '../../components/dialog/upgrade_dialog/upgrade_dialog.dart';
 import '../../components/theme_config/theme_config.dart';
-import '../manager/compress_manager/compress_manager.dart';
 import '../manager/isar_manager/isar_manager.dart';
-import '../manager/system_manager/system_manager.dart';
 import '../mixins/permission_mixin.dart';
 import '../models/upgrade_model.dart';
 

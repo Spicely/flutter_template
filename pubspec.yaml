@@ -41,8 +41,6 @@ dependencies:
   get:
   envied:
   permission_handler:
-  simple_native_image_compress:
-  video_compress:
   path:
   path_provider:
   isar:
