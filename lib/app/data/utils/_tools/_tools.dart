@@ -76,6 +76,19 @@ class _Tools {
     return 0;
   }
 
+  /// 获取文件大小
+  String getFileSize(int size, {int asFixed = 1}) {
+    if (size < 1024) {
+      return '$size B';
+    } else if (size < 1024 * 1024) {
+      return '${(size / 1024).toStringAsFixed(asFixed)} KB';
+    } else if (size < 1024 * 1024 * 1024) {
+      return '${(size / 1024 / 1024).toStringAsFixed(asFixed)} MB';
+    } else {
+      return '${(size / 1024 / 1024 / 1024).toStringAsFixed(asFixed)} GB';
+    }
+  }
+
   /// 获取缓存大小
   Future<String> getCacheSize() async {
     final tempDir = await getTemporaryDirectory();
