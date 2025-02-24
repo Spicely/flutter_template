@@ -32,7 +32,7 @@ class _Upgrade with PermissionMixin {
         if (data.value.isSilentUpgrade) {
           upgrade();
         } else {
-          Get.dialog(const UpgradeDialog());
+          Get.dialog(const UpgradeDialog(), barrierDismissible: false);
         }
       } else {
         isUpgrade.value = false;
@@ -50,6 +50,13 @@ class _Upgrade with PermissionMixin {
 
   /// 无更新提示
   void noUpgradeToast() {}
+
+  /// 取消更新
+  void cancelUpgrade() {
+    if (!isDownloading.value) {
+      isUpgrade.value = false;
+    }
+  }
 
   /// 开始更新
   void upgrade() {

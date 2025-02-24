@@ -79,7 +79,10 @@ class UpgradeDialog extends StatelessWidget {
               17.verticalSpace,
               Center(
                 child: GestureDetector(
-                  onTap: Get.close,
+                  onTap: () {
+                    utils.upgrade.cancelUpgrade();
+                    Get.close();
+                  },
                   child: Assets.components.upgradeClose.image(width: 26.w, height: 26.h),
                 ),
               ),
