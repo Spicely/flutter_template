@@ -21,5 +21,9 @@ class _Error {
 
   void error(Object error) {
     utils.logger.e(error);
+    if (error is PermissionException) {
+      Get.dialog(PermissionDialog(exception: error), barrierDismissible: false, useSafeArea: false);
+      return;
+    }
   }
 }

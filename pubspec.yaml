@@ -59,6 +59,7 @@ dependencies:
   cached_network_image:
   flutter_spinkit:
   flutter_screenutil:
+  device_info_plus:
   
 
 dev_dependencies:
