@@ -16,8 +16,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../env/env.dart';
 import '../../components/cached_image/cached_image.dart';
+import '../../components/dialog/permission_dialog/permission_dialog.dart';
 import '../../components/dialog/upgrade_dialog/upgrade_dialog.dart';
 import '../../components/theme_config/theme_config.dart';
+import '../exception/permission_exception.dart';
 import '../manager/isar_manager/isar_manager.dart';
 import '../mixins/permission_mixin.dart';
 import '../models/upgrade_model.dart';
