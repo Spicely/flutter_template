@@ -56,3 +56,4 @@ releases:
           target: dmg
           build_args:
             dart-define:
+              APP_ENV: prod

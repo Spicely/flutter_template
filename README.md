@@ -6,6 +6,8 @@
     flutter pub global activate get_cli # 安装get_cli
     flutter pub global activate intl_utils
 
+    dart pub global activate flutter_distributor
+
     dart pub global activate spider
 
     /// 资源处理
