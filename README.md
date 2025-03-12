@@ -48,6 +48,10 @@
     /// 打包正式windows
     flutter_distributor release --name prod --jobs release-windows --skip-clean
 
+
+    /// 打包正式macos
+    flutter_distributor release --name prod --jobs release-macos --skip-clean
+
 ```
 
 > 权限

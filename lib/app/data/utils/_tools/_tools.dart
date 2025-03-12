@@ -201,4 +201,25 @@ class _Tools {
       );
     });
   }
+
+  /// 下载并保存文件
+  Future<String> downloadAndSaveFile(String url, {CancelToken? cancelToken, String folder = 'downloads'}) async {
+    String basename = p.basename(url);
+    String savePath = p.join(utils.config.directory.path, folder, basename);
+
+    /// 先检查文件是否存在
+    if (await File(savePath).exists()) {
+      return savePath;
+    }
+
+    await Dio().download(
+      url,
+      savePath,
+      cancelToken: cancelToken,
+      onReceiveProgress: (count, total) {
+        // EasyLoading.showProgress(count / total, status: '下载中${(count / total * 100).toStringAsFixed(2)}%');
+      },
+    );
+    return savePath;
+  }
 }
