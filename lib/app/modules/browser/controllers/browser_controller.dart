@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 class BrowserController extends GetxController {
   String title = Get.parameters['title'] ?? '';
@@ -35,13 +34,6 @@ class BrowserController extends GetxController {
       ),
     );
     super.onInit();
-    if (WebViewPlatform.instance is AndroidWebViewPlatform) {
-      final AndroidWebViewController androidController = controller.platform as AndroidWebViewController;
-      //textZoom 默认值是 100
-      if (title == '用户协议' || title == '服务协议' || title == '会员协议' || title == '隐私政策') {
-        androidController.setTextZoom(250);
-      }
-    }
 
     loadHtmlAction();
   }
