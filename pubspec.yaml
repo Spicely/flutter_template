@@ -60,6 +60,9 @@ dependencies:
   flutter_spinkit:
   flutter_screenutil:
   device_info_plus:
+  back_to_desktop:
+    git:
+      url: https://github.com/Spicely/android_back_to_desktop.git
   
 
 dev_dependencies:
