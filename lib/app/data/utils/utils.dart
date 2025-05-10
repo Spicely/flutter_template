@@ -22,7 +22,7 @@ import '../../components/theme_config/theme_config.dart';
 import '../exception/permission_exception.dart';
 import '../manager/isar_manager/isar_manager.dart';
 import '../mixins/permission_mixin.dart';
-import '../models/upgrade_model.dart';
+import '../models/upgrade_model/upgrade_model.dart';
 
 part '_apis.dart';
 part '_config.dart';
