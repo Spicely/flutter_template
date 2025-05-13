@@ -112,7 +112,7 @@ class _FutureLayoutBuilderState<T> extends State<FutureLayoutBuilder<T>> {
       }
 
       final List<Future<dynamic>> futures = [
-        Future.delayed(widget.delayed ?? const Duration(seconds: 2)),
+        Future.delayed(widget.delayed ?? Duration.zero),
         widget.future!.call(),
       ];
 
