@@ -1,7 +1,7 @@
 app_id: 5B599538-42B1-4826-E479-FF079F21A65D
 publisher: LeanFlutter
 publisher_url: https://github.com/leanflutter/flutter_distributor
-display_name: 工具箱
+display_name: {{project_name.snakeCase()}}
 create_desktop_icon: true
 # See: https://jrsoftware.org/ishelp/index.php?topic=setup_defaultdirname
 # install_dir_name: "D:\\HELLO-WORLD"

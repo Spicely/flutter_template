@@ -1,4 +1,4 @@
-title: flutter_template
+title: {{project_name.snakeCase()}}
 contents:
   - x: 448
     y: 244
@@ -7,4 +7,4 @@ contents:
   - x: 192
     y: 244
     type: file
-    path: flutter_template.app
+    path: {{project_name.snakeCase()}}.app
