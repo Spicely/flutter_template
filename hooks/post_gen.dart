@@ -8,11 +8,8 @@ Future<void> run(HookContext context) async {
   final projectName = context.vars['project_name'];
 
   try {
-    context.logger.info('================  进入./${projectName}  ======================');
-    await Process.run('cd', ['./${orgName}'], runInShell: true);
-
     context.logger.info('================  开始初始化模板  ======================');
-    final result = await Process.run('flutter', ['create', '.', '--org', orgName], runInShell: true);
+    final result = await Process.run('cd', ['./${projectName}', '&&', 'flutter', 'create', '.', '--org', orgName], runInShell: true);
 
     if (result.exitCode != 0) {
       context.logger.err(result.stderr);

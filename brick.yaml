@@ -29,7 +29,7 @@ vars:
   project_name:
     type: string
     description: The name of your project
-    default: Dash
+    default: dash
     prompt: What is your project name?
 
   description_info:

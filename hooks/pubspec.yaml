@@ -1,4 +1,4 @@
-name: get_template_aero_hooks
+name: hooks
 
 environment:
   sdk: ">=3.7.2 <4.0.0"
