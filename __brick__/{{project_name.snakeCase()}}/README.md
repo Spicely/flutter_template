@@ -4,17 +4,15 @@
 
 ```
     flutter pub global activate get_cli # 安装get_cli
+
     flutter pub global activate intl_utils
 
-    dart pub global activate flutter_distributor
+    dart pub global activate fastforge
 
     dart pub global activate spider
 
     /// 资源处理
     fluttergen
-
-    /// 生成平台文件
-    flutter create . --org com.muka
 
     /// 依据env生成
     dart run build_runner build
