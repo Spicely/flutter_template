@@ -1,0 +1,10 @@
+name: in_app_purchase_manager
+environment:
+  sdk: ^3.5.4
+
+
+dependencies:
+  flutter:
+      sdk: flutter
+      
+  in_app_purchase:
