@@ -24,7 +24,9 @@ mason make get_template_aero
 
 ```
 mason add in_app_purchase_manager --git-url https://github.com/Spicely/get_template_aero.git --git-path packages/in_app_purchase_manager
+```
 
+```
 mason make in_app_purchase_manager
 ```
 
