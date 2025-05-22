@@ -1,0 +1,9 @@
+name: hooks
+
+environment:
+  sdk: ">=3.7.2 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  mason:

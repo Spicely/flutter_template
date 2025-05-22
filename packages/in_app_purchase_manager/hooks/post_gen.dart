@@ -2,23 +2,31 @@ import 'dart:io';
 import 'package:mason/mason.dart';
 
 Future<void> run(HookContext context) async {
-  final progress = context.logger.progress('添加依赖...');
+  final progress = context.logger.progress('初始化模板...');
 
   try {
-    context.logger.info('================  开始添加依赖  ======================');
-    final result = await Process.run('flutter', ['pub', 'add', 'in_app_purchase'], runInShell: true);
+    context.logger.info('================  开始初始化模板  ======================');
+    final pubspecPath = './pubspec.yaml';
+    final pubspecFile = File(pubspecPath);
+    final content = await pubspecFile.readAsString();
+    final editor = YamlEditor(content);
 
-    if (result.exitCode != 0) {
-      context.logger.err(result.stderr);
-      progress.fail('================  依赖添加失败  ======================');
-      exit(result.exitCode);
+    final yamlMap = loadYaml(content);
+
+    // 若 dependencies 不存在则添加
+    if (!yamlMap.containsKey('dependencies')) {
+      editor.update(['dependencies'], {});
     }
 
-    context.logger.info(result.stdout);
+    // 添加 in_app_purchase 依赖
+    editor.update(['dependencies', 'in_app_purchase']);
+
+    await pubspecFile.writeAsString(editor.toString());
+
     progress.complete();
-    context.logger.success('================  依赖添加完成  ======================');
+    context.logger.success('================  初始化模板成功  ======================');
   } catch (e) {
-    progress.fail('================  依赖添加失败  ====================== /n $e');
+    progress.fail('================  模板初始化失败  ======================/n $e');
     exit(1);
   }
 }

@@ -3,6 +3,19 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
+/////////////////////////////////////////////////////////////////////////
+///
+/// All rights reserved.
+///
+/// author: Spicely
+///
+/// Summary: 应用商店支付 Google pay 和 Apple pay 支持
+///
+/// Date: 2025年05月22日 13:50:48 Thursday
+///
+//////////////////////////////////////////////////////////////////////////
+
+
 class InAppPurchaseManager {
   static InAppPurchase? _iap;
 

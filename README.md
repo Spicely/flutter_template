@@ -20,7 +20,7 @@ mason add get_template_aero --git-url https://github.com/Spicely/get_template_ae
 mason make get_template_aero
 ```
 
-> 插件 in_app_purchase_manager(支付插件)
+> 插件 in_app_purchase_manager (支付插件)
 
 ```
 mason add in_app_purchase_manager --git-url https://github.com/Spicely/get_template_aero.git --git-path packages/in_app_purchase_manager
@@ -28,6 +28,26 @@ mason add in_app_purchase_manager --git-url https://github.com/Spicely/get_templ
 
 ```
 mason make in_app_purchase_manager
+```
+
+> 插件 alipay_manager (支付宝插件)
+
+```
+mason add alipay_manager --git-url https://github.com/Spicely/get_template_aero.git --git-path packages/alipay_manager
+```
+
+```
+mason make alipay_manager
+```
+
+> 插件 wx_manager (微信插件)
+
+```
+mason add wx_manager --git-url https://github.com/Spicely/get_template_aero.git --git-path packages/wx_manager
+```
+
+```
+mason make wx_manager
 ```
 
 This is a starting point for a new brick.
