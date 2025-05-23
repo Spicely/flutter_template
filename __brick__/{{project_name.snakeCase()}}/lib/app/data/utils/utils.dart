@@ -41,7 +41,7 @@ class _Utils {
 
   final _ExtendUpgrade upgrade = _ExtendUpgrade._();
 
-  final Logger logger = Logger(printer: PrettyPrinter(methodCount: 2, errorMethodCount: 8, lineLength: 120, colors: true, printEmojis: true));
+  final Logger logger = Logger(printer: PrettyPrinter(methodCount: 3, errorMethodCount: 8, lineLength: 120, colors: true, printEmojis: true));
 
   final _Config config = _Config._();
 
