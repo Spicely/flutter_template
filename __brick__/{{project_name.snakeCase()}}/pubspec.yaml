@@ -61,6 +61,7 @@ dependencies:
   flutter_screenutil:
   device_info_plus:
   json_serializable:
+  flutter_html:
   back_to_desktop:
     git:
       url: https://github.com/Spicely/android_back_to_desktop.git
