@@ -16,6 +16,16 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onCreate: (Migrator m) async {
+          await m.createAll();
+        },
+        onUpgrade: (Migrator m, int from, int to) async {
+          await m.createAll();
+        },
+      );
+
   static QueryExecutor _openConnection() {
     return driftDatabase(
       name: 'flutter_database',
