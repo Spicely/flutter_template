@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'app/controllers/global_controller.dart';
-import 'app/data/manager/isar_manager/isar_manager.dart';
-import 'app/data/manager/isar_manager/models/config_model/config_model.dart';
 import 'app/data/theme/theme_custom.dart';
 import 'app/data/utils/utils.dart';
 import 'app/routes/app_pages.dart';
@@ -18,9 +16,7 @@ void main() async {
 
   await utils.init();
 
-  /// 初始化全局控制器
-  ConfigModel config = await IsarManager.configManager.get();
-  Get.put(GlobalController(config: config));
+  Get.put(GlobalController());
 
   runApp(
     ScreenUtilInit(

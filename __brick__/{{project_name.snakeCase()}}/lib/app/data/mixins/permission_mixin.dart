@@ -172,7 +172,7 @@ mixin PermissionMixin {
       ),
       margin: EdgeInsets.symmetric(horizontal: 15.w).copyWith(top: 54.h),
       borderRadius: 8.r,
-      snackPosition: SnackPosition.top,
+      snackPosition: SnackPosition.TOP,
       backgroundColor: Colors.white,
       isDismissible: false,
       duration: null,

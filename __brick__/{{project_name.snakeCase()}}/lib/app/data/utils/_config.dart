@@ -31,7 +31,7 @@ class _Config {
     directory = await getApplicationSupportDirectory();
     compressedOutputPath = p.join(directory.path, 'compress');
     await Directory(compressedOutputPath).create(recursive: true);
-    await IsarManager.init(directory.path);
+
     debugPrint(directory.path);
   }
 }

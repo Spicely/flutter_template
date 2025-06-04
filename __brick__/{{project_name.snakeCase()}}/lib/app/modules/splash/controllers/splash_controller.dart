@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../components/dialog/privacy_dialog/privacy_dialog.dart';
 import '../../../controllers/global_controller.dart';
-import '../../../data/manager/isar_manager/isar_manager.dart';
+import '../../../data/utils/utils.dart';
 import '../../../routes/app_pages.dart';
 
 class SplashController extends GetxController {
@@ -12,7 +12,7 @@ class SplashController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    if (g.config.isAgreement) {
+    if (utils.db.config.isAgreement) {
       Future.delayed(const Duration(seconds: 2), () {
         Get.offAllNamed(Routes.HOME);
       });
@@ -30,7 +30,6 @@ class SplashController extends GetxController {
 
   void onAgree() {
     Get.offAllNamed(Routes.HOME);
-    g.config.isAgreement = true;
-    IsarManager.configManager.save(g.config);
+    utils.db.config.isAgreement = true;
   }
 }

@@ -5,7 +5,7 @@ import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart' hide Response;
+import 'package:get/get.dart' hide Response, FormData, MultipartFile, Value;
 import 'package:logger/logger.dart';
 import 'package:open_file/open_file.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -19,11 +19,13 @@ import '../../components/cached_image/cached_image.dart';
 import '../../components/dialog/permission_dialog/permission_dialog.dart';
 import '../../components/dialog/upgrade_dialog/upgrade_dialog.dart';
 import '../../components/theme_config/theme_config.dart';
+import '../database/config_manager/config_manager.dart';
+import '../database/database.dart';
 import '../exception/permission_exception.dart';
-import '../manager/isar_manager/isar_manager.dart';
 import '../mixins/permission_mixin.dart';
 import '../models/upgrade_model/upgrade_model.dart';
 
+part './_db.dart';
 part '_apis.dart';
 part '_config.dart';
 part '_error.dart';
@@ -51,10 +53,13 @@ class _Utils {
 
   late _Apis apis = _Apis._();
 
+  final _DB db = _DB._();
+
   Future<void> init() async {
     await config.init();
     await plugins.init();
     await tools.init();
+    await db.init();
     apis.init();
     _ExtendThemeConfig._().init();
   }
