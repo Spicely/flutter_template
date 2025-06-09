@@ -17,15 +17,15 @@ class PageInit extends StatefulWidget {
   final Function(BuildContext)? onPageTap;
 
   const PageInit({
-    Key? key,
+    super.key,
     this.child,
     this.onExitBefore,
     this.isBackToDesktop = false,
     this.onPageTap,
-  }) : super(key: key);
+  });
 
   @override
-  _PageInitState createState() => _PageInitState();
+  State<PageInit> createState() => _PageInitState();
 }
 
 class _PageInitState extends State<PageInit> {
