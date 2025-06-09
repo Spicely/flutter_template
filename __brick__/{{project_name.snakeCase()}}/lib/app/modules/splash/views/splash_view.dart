@@ -20,9 +20,8 @@ class SplashView extends GetView<SplashController> {
   const SplashView({super.key});
   @override
   Widget build(BuildContext context) {
-    print(controller);
     return Scaffold(
-      body: Assets.images.splash.image(fit: BoxFit.cover, width: double.infinity, height: double.infinity),
+      body: controller.splash.image(fit: BoxFit.cover, width: double.infinity, height: double.infinity),
     );
   }
 }

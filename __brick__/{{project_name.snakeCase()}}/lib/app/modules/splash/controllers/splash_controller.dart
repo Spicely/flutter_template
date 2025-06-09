@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../../../gen/assets.gen.dart';
 import '../../../components/dialog/privacy_dialog/privacy_dialog.dart';
 import '../../../controllers/global_controller.dart';
 import '../../../data/utils/utils.dart';
@@ -8,6 +9,8 @@ import '../../../routes/app_pages.dart';
 
 class SplashController extends GetxController {
   GlobalController g = Get.find<GlobalController>();
+
+  AssetGenImage splash = Assets.images.splash;
 
   @override
   void onReady() {
