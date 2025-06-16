@@ -18,7 +18,7 @@ class _Apis {
   _Apis._();
 
   void init() {
-    _http.baseUrl = kReleaseMode ? Env.baseUrl : Env.baseUrlDev;
+    _http.baseUrl = kReleaseMode ? dotenv.get('BASE_URL') : dotenv.get('BASE_URL_DEV');
 
     _http.interceptors = (Dio? d) {
       return [

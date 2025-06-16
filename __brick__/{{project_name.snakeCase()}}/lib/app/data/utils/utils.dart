@@ -5,6 +5,7 @@ import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart' hide Response, FormData, MultipartFile, Value;
 import 'package:logger/logger.dart';
 import 'package:open_file/open_file.dart';
@@ -14,7 +15,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../env/env.dart';
 import '../../components/cached_image/cached_image.dart';
 import '../../components/dialog/permission_dialog/permission_dialog.dart';
 import '../../components/dialog/upgrade_dialog/upgrade_dialog.dart';
