@@ -14,6 +14,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../components/cached_image/cached_image.dart';
 import '../../components/dialog/permission_dialog/permission_dialog.dart';
@@ -23,6 +24,7 @@ import '../database/config_manager/config_manager.dart';
 import '../database/database.dart';
 import '../exception/permission_exception.dart';
 import '../mixins/permission_mixin.dart';
+import '../models/download_model/download_model.dart';
 import '../models/upgrade_model/upgrade_model.dart';
 
 part './_db.dart';

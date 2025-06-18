@@ -3,6 +3,9 @@ part of '../utils.dart';
 class _Tools {
   _Tools._();
 
+  /// 传输存储
+  ValueNotifier<List<DownloadModel>> downloads = ValueNotifier<List<DownloadModel>>([]);
+
   Future<void> init() async {
     await _getVersion();
   }
@@ -212,14 +215,35 @@ class _Tools {
       return savePath;
     }
 
+    DownloadModel downloadModel = DownloadModel(id: const Uuid().v4(), name: basename, progress: 0.0);
+
+    downloads.value = [...downloads.value, downloadModel];
+
     await Dio().download(
       url,
       savePath,
       cancelToken: cancelToken,
       onReceiveProgress: (count, total) {
-        // EasyLoading.showProgress(count / total, status: '下载中${(count / total * 100).toStringAsFixed(2)}%');
+        var model = downloadModel.copyWith(progress: count / total);
+        _updateDownloadModel(model);
       },
     );
+    Future.delayed(2.seconds, () {
+      _removeDownload(downloadModel.id);
+    });
     return savePath;
+  }
+
+  void _removeDownload(String id) {
+    downloads.value = downloads.value.where((v) => v.id != id).toList();
+  }
+
+  void _updateDownloadModel(DownloadModel updatedModel) {
+    final index = downloads.value.indexWhere((v) => v.id == updatedModel.id);
+    if (index != -1) {
+      final updatedList = [...downloads.value];
+      updatedList[index] = updatedModel;
+      downloads.value = updatedList;
+    }
   }
 }

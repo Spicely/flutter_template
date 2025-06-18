@@ -61,6 +61,7 @@ dependencies:
   json_serializable:
   flutter_html:
   tap_debouncer:
+  uuid:
   back_to_desktop:
     git:
       url: https://github.com/Spicely/android_back_to_desktop.git
